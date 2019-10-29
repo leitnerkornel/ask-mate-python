@@ -16,7 +16,7 @@ def get_answers():
 
 def get_questions():
     questions = []
-    with open(ANSWERS) as csv_file:
+    with open(QUESTIONS) as csv_file:
         reader = csv.DictReader(csv_file)
         for item in reader:
             questions.append(dict(item))

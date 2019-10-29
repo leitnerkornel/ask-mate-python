@@ -9,6 +9,11 @@ saved_titles = {}
 @app.route('/')
 @app.route('/list')
 def route_list():
+    questions = connection.get_questions()
+    return render_template("index.html", questions=questions)
+
+@app.route('/list')
+def answer_and_message():
     answer_text = None
     message_text = None
     if 'answer' in saved_answer:
