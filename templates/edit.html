@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post answer</title>
+</head>
+<body>
+    <h1>Post an answer</h1>
+    <p>
+    {{ note if note else 'There is no saved notes' }}
+    </p>
+    <form action="/edit-note" method="post">
+        <label for="note-input">Note:</label>
+        <textarea id="note-input" name="note" rows="8" cols="80"></textarea>
+        <button type="submit">Save note!</button>
+    </form>
+</body>
+</html>
