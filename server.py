@@ -24,6 +24,12 @@ def route_post():
         answer_text = saved_answer['answer']
     return render_template('edit.html', answer=answer_text)
 
+@app.route('/add-question')
+def route_add_question():
+    return render_template('add.html')
+
+
+
 
 if __name__ == '__main__':
     app.run(
