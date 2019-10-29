@@ -3,26 +3,45 @@ import connection
 app = Flask(__name__)
 
 saved_answer = {}
-
+saved_message = {}
+saved_titles = {}
 
 @app.route('/')
 @app.route('/list')
 def route_list():
     answer_text = None
+    message_text = None
     if 'answer' in saved_answer:
         answer_text = saved_answer['answer']
-    return render_template("index.html", answer=answer_text)
+    if 'message' in saved_message:
+        message_text = saved_message['message']
+    return render_template("index.html", answer=answer_text, message=message_text)
 
 
-@app.route('/post-answer', methods=['POST'])
+@app.route('/post-answer', methods=['GET', 'POST'])
 def route_post():
     if request.method == 'POST':
+        saved_titles['title'] = request.form['title']
         saved_answer['answer'] = request.form['answer']
         return redirect('/list')
     answer_text = None
     if 'answer' in saved_answer:
         answer_text = saved_answer['answer']
-    return render_template('edit.html', answer=answer_text)
+    return render_template('answer.html', answer=answer_text)
+
+
+@app.route('/add-question', methods=['GET', 'POST'])
+def route_add():
+    if request.method == "POST":
+        saved_message['message'] = request.form['message']
+        return redirect('/list')
+    message_text = None
+    title_text = None
+    if 'message' in saved_message:
+        message_text = saved_message['message']
+    if 'title' in saved_titles:
+        title_text = saved_titles['title']
+    return render_template('message.html', message=message_text,  title=title_text)
 
 
 if __name__ == '__main__':

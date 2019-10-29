@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ask a question</title>
+</head>
+<body>
+    <h1>Ask a question</h1>
+    <p>
+    {{ question if question else 'No question' }}
+    </p>
+    <form action="/add-question" method="post">
+        <label for="title-input">Title:</label>
+        <textarea id="title-input" name="title" rows="1" cols="40"></textarea><br>
+        <label for="message-input">Message:</label>
+        <textarea id="message-input" name="note" rows="8" cols="80"></textarea>
+        <button type="submit">Save message</button>
+    </form>
+</body>
+</html>
