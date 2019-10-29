@@ -43,6 +43,12 @@ def route_add():
         title_text = saved_titles['title']
     return render_template('message.html', message=message_text,  title=title_text)
 
+@app.route('/add-question')
+def route_add_question():
+    return render_template('add.html')
+
+
+
 
 if __name__ == '__main__':
     app.run(
