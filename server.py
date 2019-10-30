@@ -7,11 +7,13 @@ saved_answer = {}
 saved_message = {}
 saved_titles = {}
 
+
 @app.route('/')
 @app.route('/list')
 def route_list():
     questions = data_manager.get_questions()
     return render_template("index.html", questions=questions)
+
 
 @app.route('/list')
 def answer_and_message():
@@ -47,9 +49,16 @@ def route_add():
         message_text = saved_message['message']
     if 'title' in saved_titles:
         title_text = saved_titles['title']
-    return render_template('message.html', message=message_text,  title=title_text)
+    return render_template('message.html', message=message_text, title=title_text)
 
 
+@app.route('/question/<question_id>', methods=['GET', 'POST'])
+def route_question(question_id):
+    questions = data_manager.get_questions()
+    for item in questions:
+        if item['id'] == question_id:
+            asked_question = item
+    return render_template('question.html', asked_question=asked_question)
 
 
 if __name__ == '__main__':

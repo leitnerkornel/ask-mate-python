@@ -1,6 +1,7 @@
 import datetime
 import os
 import connection
+
 PATH = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -14,6 +15,7 @@ def get_questions():
     QUESTION = f"{PATH}/sample_data/question.csv"
     questions = connection.get_csv_data(QUESTION)
     return questions
+
 
 def convert_epoch_time(time):
     return datetime.datetime.fromtimestamp(
