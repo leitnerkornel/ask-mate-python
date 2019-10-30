@@ -16,8 +16,7 @@ def get_questions():
     return questions
 
 def convert_epoch_time(time):
-    print(
-        datetime.datetime.fromtimestamp(
+    return datetime.datetime.fromtimestamp(
             int(time)
         ).strftime('%Y-%m-%d %H:%M:%S')
-    )
+

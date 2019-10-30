@@ -7,12 +7,8 @@
 <body>
     <h1>@skm@t3</h1>
 
-    <a href="/post-answer">Post answer</a><br>
-    <a href="/add-question">Ask a question</a>
+    <p><a href="/add-question">Ask a question</a></p>
 
-
-<a href="/post-answer">Post answer</a><br>
-<a href="/add-question">Ask a question</a>
 <table>
     <thead>
     <tr>
@@ -28,9 +24,13 @@
     <tbody>
     {% for question in questions %}
         <tr>
-            {% for data in question %}
-                <td>{{ question[data] }}</td>
-            {% endfor %}
+            <td> {{ question.id }} </td>
+            <td> {{ question.submission_time }} </td>
+            <td> {{ question.view_number }} </td>
+            <td> {{ question.vote_number }}</td>
+            <td> <a href="/question.html">{{ question.title }}</a> </td>
+            <td> {{ question.message }}</td>
+            <td> {{ question.image }}</td>
         </tr>
     {% endfor %}
     </tbody>
