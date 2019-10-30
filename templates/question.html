@@ -8,7 +8,7 @@
 <h1>Questions</h1>
     <table>
         <tr><td>{{ asked_question.title }}</td></tr>
-        <tr><td>{{ asked_question.message }}</td></tr>
+        <tr><td>{{ asked_question.message | safe}}</td></tr>
     </table>
 <a href="/list"><button type="button">Go back to main</button></a>
 </body>
