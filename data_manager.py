@@ -8,6 +8,10 @@ PATH = os.path.dirname(os.path.abspath(__file__))
 def get_answers():
     ANSWER = f"{PATH}/sample_data/answer.csv"
     answers = connection.get_csv_data(ANSWER)
+    for answer in answers:
+        answer['message'] = convert_linebreaks_to_br(answer['message'])
+    for answer in answers:
+        answer['submission_time'] = convert_epoch_time(answer['submission_time'])
     return answers
 
 
