@@ -6,11 +6,24 @@
 </head>
 <body>
 <h1>Questions</h1>
-    <table>
-        <tr><td>{{ asked_question.title }}</td></tr>
-        <tr><td>{{ asked_question.message | safe}}</td></tr>
-    </table>
-<a href="/list"><button type="button">Go back to main</button></a>
-<a href="/post-answer"><button type="button">Post an answer</button></a>
+<table border="1">
+    <tr>
+        <td>{{ asked_question.title }}</td>
+    </tr>
+    <tr>
+        <td>{{ asked_question.message | safe }}</td>
+    </tr>
+    {% for answers in answers_list %}
+        <tr>
+            <td>{{ answers.message | safe }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<a href="/list">
+    <button type="button">Go back to main</button>
+</a><br>
+<a href="/post-answer">
+    <button type="button">Post an answer</button>
+</a>
 </body>
 </html>

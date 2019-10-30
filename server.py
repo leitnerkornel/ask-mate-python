@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import data_manager
 
-
 app = Flask(__name__)
 
 saved_answer = {}
@@ -12,7 +11,6 @@ saved_titles = {}
 @app.route('/')
 @app.route('/list')
 def route_list():
-
     questions = data_manager.get_questions()
     return render_template("index.html", questions=questions)
 
@@ -56,11 +54,16 @@ def route_add():
 
 @app.route('/question/<question_id>', methods=['GET', 'POST'])
 def route_question(question_id):
+    answers_list = []
     questions = data_manager.get_questions()
+    answers = data_manager.get_answers()
     for item in questions:
         if item['id'] == question_id:
             asked_question = item
-    return render_template('question.html', asked_question=asked_question)
+    for item in answers:
+        if item['question_id'] == question_id:
+            answers_list.append(item)
+    return render_template('question.html', asked_question=asked_question, answers_list=answers_list)
 
 
 if __name__ == '__main__':

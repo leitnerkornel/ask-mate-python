@@ -5,11 +5,11 @@
     <title>@skm@t3</title>
 </head>
 <body>
-    <h1>@skm@t3</h1>
+<h1>@skm@t3</h1>
 
-    <p><a href="/add-question">Ask a question</a></p>
+<p><a href="/add-question">Ask a question</a></p>
 
-<table border="1" >
+<table border="1">
     <thead>
     <tr>
         <th>ID</th>
@@ -28,10 +28,11 @@
             <td align="center"> {{ question.submission_time }} </td>
             <td align="center"> {{ question.view_number }} </td>
             <td align="center"> {{ question.vote_number }}</td>
-            <td align="center"> <a href="{{ url_for("route_question", question_id=question['id']) }}">{{ question.title }}</a> </td>
-            <td> {{ question.message | safe}}</td>
+            <td align="center"><a
+                    href="{{ url_for("route_question", question_id=question['id']) }}">{{ question.title }}</a></td>
+            <td> {{ question.message | safe }}</td>
             {% if question.image|length %}
-                <td> <img src="./static/{{ question.image }}" width="80" height="80"></td>
+                <td><img src="./static/{{ question.image }}" width="80" height="80"></td>
             {% endif %}
         </tr>
     {% endfor %}
