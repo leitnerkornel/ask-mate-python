@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
-import connection
+import data_manager
+
 app = Flask(__name__)
 
 saved_answer = {}
@@ -9,7 +10,7 @@ saved_titles = {}
 @app.route('/')
 @app.route('/list')
 def route_list():
-    questions = connection.get_questions()
+    questions = data_manager.get_questions()
     return render_template("index.html", questions=questions)
 
 @app.route('/list')
@@ -47,6 +48,8 @@ def route_add():
     if 'title' in saved_titles:
         title_text = saved_titles['title']
     return render_template('message.html', message=message_text,  title=title_text)
+
+
 
 
 if __name__ == '__main__':
