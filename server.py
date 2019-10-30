@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import data_manager
 
+
 app = Flask(__name__)
 
 saved_answer = {}
@@ -10,6 +11,7 @@ saved_titles = {}
 @app.route('/')
 @app.route('/list')
 def route_list():
+
     questions = data_manager.get_questions()
     return render_template("index.html", questions=questions)
 
