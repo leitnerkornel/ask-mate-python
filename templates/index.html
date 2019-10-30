@@ -9,7 +9,7 @@
 
     <p><a href="/add-question">Ask a question</a></p>
 
-<table>
+<table border="1" >
     <thead>
     <tr>
         <th>ID</th>
@@ -24,20 +24,21 @@
     <tbody>
     {% for question in questions %}
         <tr>
-            <td> {{ question.id }} </td>
-            <td> {{ question.submission_time }} </td>
-            <td> {{ question.view_number }} </td>
-            <td> {{ question.vote_number }}</td>
-            <td> <a href="{{ url_for("route_question", question_id=question['id']) }}">{{ question.title }}</a> </td>
+            <td align="center"> {{ question.id }} </td>
+            <td align="center"> {{ question.submission_time }} </td>
+            <td align="center"> {{ question.view_number }} </td>
+            <td align="center"> {{ question.vote_number }}</td>
+            <td align="center"> <a href="{{ url_for("route_question", question_id=question['id']) }}">{{ question.title }}</a> </td>
             <td> {{ question.message | safe}}</td>
             {% if question.image|length %}
-                <td> <img src="./static/{{ question.image }}" width="40" height="40"></td>
+                <td> <img src="./static/{{ question.image }}" width="80" height="80"></td>
             {% endif %}
         </tr>
     {% endfor %}
     </tbody>
     </tr>
 </table>
+<hr>
 
 </body>
 </html>
