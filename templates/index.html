@@ -29,7 +29,7 @@
             <td> {{ question.view_number }} </td>
             <td> {{ question.vote_number }}</td>
             <td> <a href="/question.html">{{ question.title }}</a> </td>
-            <td> {{ question.message }}</td>
+            <td> {{ question.message| safe }}</td>
             {% if question.image|length %}
                 <td> <img src="./static/{{ question.image }}" width="40" height="40"></td>
             {% endif %}
