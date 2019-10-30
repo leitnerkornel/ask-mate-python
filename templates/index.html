@@ -28,8 +28,6 @@
             <td> {{ question.submission_time }} </td>
             <td> {{ question.view_number }} </td>
             <td> {{ question.vote_number }}</td>
-            <td> <a href="/question.html">{{ question.title }}</a> </td>
-            <td> {{ question.message| safe }}</td>
             <td> <a href="{{ url_for("route_question", question_id=question['id']) }}">{{ question.title }}</a> </td>
             <td> {{ question.message | safe}}</td>
             {% if question.image|length %}
