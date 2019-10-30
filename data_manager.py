@@ -15,8 +15,16 @@ def get_questions():
     questions = connection.get_csv_data(QUESTION)
     return questions
 
+
 def convert_epoch_time(time):
     return datetime.datetime.fromtimestamp(
             int(time)
         ).strftime('%Y-%m-%d %H:%M:%S')
+
+
+def generate_next_id(list_of_q_or_a):
+    return str(int(list_of_q_or_a[-1]['id']) + 1)
+
+
+
 
