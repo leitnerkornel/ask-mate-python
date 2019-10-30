@@ -11,8 +11,12 @@ def get_answers():
 
 
 def get_questions():
-    QUESTION = f"{PATH}/sample_data/question.csv"
-    questions = connection.get_csv_data(QUESTION)
+    QUESTIONPATH = f"{PATH}/sample_data/question.csv"
+    questions = connection.get_csv_data(QUESTIONPATH)
+    for question in questions:
+        question['message'] = convert_linebreaks_to_br(question['message'])
+    for question in questions:
+        question['submission_time'] = convert_epoch_time(question['submission_time'])
     return questions
 
 
