@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import os
 import connection
 
@@ -26,7 +26,7 @@ def get_questions():
 
 
 def convert_epoch_time(time):
-    return datetime.datetime.fromtimestamp(
+    return datetime.fromtimestamp(
         int(time)
     ).strftime('%Y-%m-%d %H:%M:%S')
 

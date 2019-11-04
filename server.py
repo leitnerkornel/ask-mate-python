@@ -3,10 +3,6 @@ import data_manager
 
 app = Flask(__name__)
 
-saved_answer = {}
-saved_message = {}
-saved_titles = {}
-
 
 @app.route('/')
 @app.route('/list')
@@ -17,6 +13,8 @@ def route_list():
 
 @app.route('/list')
 def answer_and_message():
+    saved_answer = {}
+    saved_message = {}
     answer_text = None
     message_text = None
     if 'answer' in saved_answer:
@@ -28,28 +26,36 @@ def answer_and_message():
 
 @app.route('/post-answer', methods=['GET', 'POST'])
 def route_post():
+    saved_answer = {}
+    saved_titles = {}
     if request.method == 'POST':
         saved_titles['title'] = request.form['title']
         saved_answer['answer'] = request.form['answer']
         return redirect('/list')
     answer_text = None
+    answer_title = None
     if 'answer' in saved_answer:
         answer_text = saved_answer['answer']
-    return render_template('answer.html', answer=answer_text)
+    if 'title' in saved_titles:
+        answer_title = saved_titles['title']
+    return render_template('answer.html', answer=answer_text, title=answer_title)
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
 def route_add():
+    saved_message = {}
+    saved_titles = {}
     if request.method == "POST":
-        saved_message['message'] = request.form['message']
+        saved_message['note'] = request.form['note']
+        saved_message['title'] = request.form['title']
         return redirect('/list')
     message_text = None
     title_text = None
-    if 'message' in saved_message:
-        message_text = saved_message['message']
+    if 'note' in saved_message:
+        message_text = saved_message['note']
     if 'title' in saved_titles:
         title_text = saved_titles['title']
-    return render_template('message.html', message=message_text, title=title_text)
+    return render_template('message.html', note=message_text, title=title_text)
 
 
 @app.route('/question/<question_id>', methods=['GET', 'POST'])
