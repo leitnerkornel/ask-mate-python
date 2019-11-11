@@ -31,8 +31,10 @@
             <td align="center"><a
                     href="{{ url_for("route_question", question_id=question['id']) }}">{{ question.title }}</a></td>
             <td> {{ question.message | safe }}</td>
-            {% if question.image|length %}
+            {% if question.image %}
                 <td><img src="./static/{{ question.image }}" width="80" height="80"></td>
+            {% else %}
+                <td></td>
             {% endif %}
         </tr>
     {% endfor %}
