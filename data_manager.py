@@ -1,28 +1,41 @@
-from datetime import datetime
-import os
 import connection
+import os
+from datetime import datetime
 
 PATH = os.path.dirname(os.path.abspath(__file__))
 
 
-def get_answers():
-    ANSWER = f"{PATH}/sample_data/answer.csv"
-    answers = connection.get_csv_data(ANSWER)
-    for answer in answers:
-        answer['message'] = convert_linebreaks_to_br(answer['message'])
-    for answer in answers:
-        answer['submission_time'] = convert_epoch_time(answer['submission_time'])
+@connection.connection_handler
+def get_answers(cursor):
+    cursor.execute("""
+                    SELECT * FROM answer;
+                   """)
+    answers = cursor.fetchall()
     return answers
 
+    # ANSWER = f"{PATH}/sample_data/answer.csv"
+    # answers = connection.get_csv_data(ANSWER)
+    # for answer in answers:
+    #     answer['message'] = convert_linebreaks_to_br(answer['message'])
+    # for answer in answers:
+    #     answer['submission_time'] = convert_epoch_time(answer['submission_time'])
+    # return answers
 
-def get_questions():
-    QUESTIONPATH = f"{PATH}/sample_data/question.csv"
-    questions = connection.get_csv_data(QUESTIONPATH)
-    for question in questions:
-        question['message'] = convert_linebreaks_to_br(question['message'])
-    for question in questions:
-        question['submission_time'] = convert_epoch_time(question['submission_time'])
+@connection.connection_handler
+def get_questions(cursor):
+    cursor.execute("""
+                        SELECT * FROM question;
+                       """)
+    questions = cursor.fetchall()
     return questions
+
+    # QUESTIONPATH = f"{PATH}/sample_data/question.csv"
+    # questions = connection.get_csv_data(QUESTIONPATH)
+    # for question in questions:
+    #     question['message'] = convert_linebreaks_to_br(question['message'])
+    # for question in questions:
+    #     question['submission_time'] = convert_epoch_time(question['submission_time'])
+    # return questions
 
 
 def convert_epoch_time(time):
