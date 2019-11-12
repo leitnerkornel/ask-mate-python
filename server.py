@@ -18,19 +18,12 @@ def all_question():
 
 @app.route('/add-question', methods=['GET', 'POST'])
 def route_add():
-    saved_message = {}
-    saved_titles = {}
     if request.method == "POST":
-        saved_message['note'] = request.form['note']
-        saved_message['title'] = request.form['title']
-        return redirect('/list')
-    message_text = None
-    title_text = None
-    if 'note' in saved_message:
-        message_text = saved_message['note']
-    if 'title' in saved_titles:
-        title_text = saved_titles['title']
-    return render_template('message.html', note=message_text, title=title_text)
+        question_title = request.form['title']
+        question_message = request.form['note']
+        data_manager.add_question(question_title, question_message)
+        return redirect('/')
+    return render_template('message.html')
 
 
 @app.route('/question/<question_id>', methods=['GET', 'POST'])

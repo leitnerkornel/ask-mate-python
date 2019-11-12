@@ -47,6 +47,15 @@ def get_last_five_question(cursor):
     questions = cursor.fetchall()
     return questions
 
+@connection.connection_handler
+def add_question(cursor, question_title, question_message):
+    cursor.execute("""
+                        INSERT INTO question 
+                        (title, message)
+                        VALUES (%(question_title)s, %(question_message)s) ;
+                       """,
+                    {'question_title':question_title, 'question_message': question_message})
+
 
 @connection.connection_handler
 def save_answers_to_question(cursor, answer_text, question_id):
