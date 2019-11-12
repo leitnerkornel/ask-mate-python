@@ -7,22 +7,25 @@
 <body>
 <h2>Question</h2>
 
-        <tr>
-            <th>Title</th>
-            <td>{{ question.title | safe }}</td></br>
-        </tr>
-        <tr>
-            <th>Message</th>
-            <td>{{ question.message | safe }}</td></br>
-        </tr>
+<tr>
+    <th>Title</th>
+    <td>{{ question.title | safe }}</td>
+    </br>
+</tr>
+<tr>
+    <th>Message</th>
+    <td>{{ question.message | safe }}</td>
+    </br>
+</tr>
 
 <h2>Answers</h2>
-    {% for answer in answers %}
-        <tr>
-            <th>Message</th>
-            <td>{{ answer.message | safe }}</td></br>
-        </tr>
-    {% endfor %}
+{% for answer in answers %}
+    <tr>
+        <th>Message</th>
+        <td>{{ answer.message | safe }}</td>
+        </br>
+    </tr>
+{% endfor %}
 
 <a href="/list">
     <button type="button">Go back to main</button>

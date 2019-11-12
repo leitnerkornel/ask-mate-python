@@ -5,11 +5,12 @@
     <title>Post answer</title>
 </head>
 <body>
-    <h1>Post an answer</h1>
-    <form action="/question/{{ question.id }}/new-answer" method="POST">
-        <label for="answer-input">Note:</label>
-        <textarea id="answer-input" name="answer" rows="8" cols="80" required placeholder="Write your question here"></textarea>
-        <button type="submit">Save answer</button>
-    </form>
+<h1>Post an answer</h1>
+<form action="/question/{{ question.id }}/new-answer" method="POST">
+    <label for="answer-input">Note:</label>
+    <textarea id="answer-input" name="answer" rows="8" cols="80" required
+              placeholder="Write your question here"></textarea>
+    <button type="submit">Save answer</button>
+</form>
 </body>
 </html>
