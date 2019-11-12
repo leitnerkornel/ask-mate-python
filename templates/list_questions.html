@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>@skm@t3</title>
+</head>
+<body>
+<h1>@skm@t3</h1>
+
+<a href="{{ url_for('route_add') }}">
+    <button type="button">Ask a question</button>
+</a><br>
+
+<h2>All questions</h2>
+
+<h3>All the question, newest first</h3>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Submission Time</th>
+        <th>View Number</th>
+        <th>Vote Number</th>
+        <th>Title</th>
+        <th>Message</th>
+        <th>Image</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for question in questions %}
+        <tr>
+            <td align="center"> {{ question.id }} </td>
+            <td align="center"> {{ question.submission_time }} </td>
+            <td align="center"> {{ question.view_number }} </td>
+            <td align="center"> {{ question.vote_number }}</td>
+            <td align="center"><a
+                    href="{{ url_for("route_question", question_id=question['id']) }}">{{ question.title }}</a></td>
+            <td> {{ question.message | safe }}</td>
+            {% if question.image %}
+                <td><img src="./static/{{ question.image }}" width="80" height="80"></td>
+            {% else %}
+                <td></td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table></br>
+
+<a href="{{ url_for('last_five_question') }}">
+    <button type="button">Go back to main</button>
+</a><br>
+
+</body>
+</html>
