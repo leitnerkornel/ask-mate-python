@@ -11,9 +11,9 @@ def last_five_question():
 
 
 @app.route('/list')
-def route_list():
+def all_question():
     questions = data_manager.get_questions()
-    return render_template("index.html", questions=questions)
+    return render_template("list_questions.html", questions=questions)
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
