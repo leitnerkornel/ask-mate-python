@@ -7,17 +7,14 @@
 <body>
 <h2>Question</h2>
 
-
-    {% for column in question %}
         <tr>
             <th>Title</th>
-            <td>{{ column.title | safe }}</td></br>
+            <td>{{ question.title | safe }}</td></br>
         </tr>
         <tr>
             <th>Message</th>
-            <td>{{ column.message | safe }}</td></br>
+            <td>{{ question.message | safe }}</td></br>
         </tr>
-    {% endfor %}
 
 <h2>Answers</h2>
     {% for answer in answers %}
@@ -30,7 +27,7 @@
 <a href="/list">
     <button type="button">Go back to main</button>
 </a><br>
-<a href="/post-answer">
+<a href="{{ url_for('route_post', question_id=question['id']) }}">
     <button type="button">Post an answer</button>
 </a>
 </body>
