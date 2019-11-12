@@ -63,13 +63,6 @@ def route_question(question_id):
     answers_list = []
     question = data_manager.get_question_by_id(question_id)
     answers = data_manager.get_answers_by_question_id(question_id)
-
-    #for item in questions:
-    #    if item['id'] == question_id:
-    #        asked_question = item
-    #for item in answers:
-    #    if item['question_id'] == question_id:
-    #        answers_list.append(item)
     return render_template('question.html', question=question, answers=answers)
 
 
