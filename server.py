@@ -5,6 +5,11 @@ app = Flask(__name__)
 
 
 @app.route('/')
+def last_five_question():
+    five_question = data_manager.get_last_five_question()
+    return render_template("index.html", questions=five_question)
+
+
 @app.route('/list')
 def route_list():
     questions = data_manager.get_questions()
