@@ -23,7 +23,7 @@ def get_question_by_id(cursor, question_id):
                     WHERE id = %(question_id)s;
                    """,
                    {'question_id': question_id})
-    question = cursor.fetchall()
+    question = cursor.fetchone()
     return question
 
 
@@ -34,6 +34,15 @@ def get_questions(cursor):
                        """)
     questions = cursor.fetchall()
     return questions
+
+
+@connection.connection_handler
+def save_answers_to_question(cursor, answer_text, question_id):
+    cursor.execute("""
+                        INSERT INTO answer(message, question_id)
+                        VALUES (%(answer_text)s, %(question_id)s)
+                    """,
+                   {'answer_text': answer_text, 'question_id': question_id})
 
 
 def convert_epoch_time(time):
