@@ -5,9 +5,13 @@
     <title>@skm@t3</title>
 </head>
 <body>
-<h1>@skm@t3</h1>
+<h1>@skm@t3</h1></br>
+{% if  %}
+<a href="{{ url_for('route_add') }}">
+    <button type="button">Ask a question</button>
+</a><br>
 
-<p><a href="/add-question">Ask a question</a></p>
+<h3>The last 5 questions</h3>
 
 <table border="1">
     <thead>
@@ -39,9 +43,11 @@
         </tr>
     {% endfor %}
     </tbody>
-    </tr>
-</table>
-<hr>
+</table></br>
+
+<a href="{{ url_for('all_question') }}">
+    <button type="button">See all question</button>
+</a></br>
 
 </body>
 </html>
