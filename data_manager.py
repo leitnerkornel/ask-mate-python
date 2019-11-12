@@ -6,10 +6,12 @@ PATH = os.path.dirname(os.path.abspath(__file__))
 
 
 @connection.connection_handler
-def get_answers(cursor):
+def get_answers_by_question_id(cursor, question_id):
     cursor.execute("""
-                    SELECT * FROM answer;
-                   """)
+                    SELECT * FROM answer
+                    WHERE question_id = %(question_id)s;
+                   """,
+                   {'question_id': question_id})
     answers = cursor.fetchall()
     return answers
 
@@ -20,6 +22,17 @@ def get_answers(cursor):
     # for answer in answers:
     #     answer['submission_time'] = convert_epoch_time(answer['submission_time'])
     # return answers
+
+
+@connection.connection_handler
+def get_question_by_id(cursor, question_id):
+    cursor.execute("""
+                    SELECT * FROM question
+                    WHERE id = %(question_id)s;
+                   """,
+                   {'question_id': question_id})
+    question = cursor.fetchall()
+    return question
 
 @connection.connection_handler
 def get_questions(cursor):
