@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>@skm@t3</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
 <h1>@skm@t3</h1></br>
-{#{% if  %}#}
+
+<h2>Questions and Answers</h2></br>
+
 <a href="{{ url_for('route_add') }}">
     <button type="button">Ask a question</button>
 </a><br>
