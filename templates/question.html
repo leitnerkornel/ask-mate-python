@@ -5,20 +5,28 @@
     <title>Questions</title>
 </head>
 <body>
-<h1>Questions</h1>
-<table border="1">
-    <tr>
-        <td>{{ asked_question.title }}</td>
-    </tr>
-    <tr>
-        <td>{{ asked_question.message | safe }}</td>
-    </tr>
-    {% for answers in answers_list %}
+<h2>Question</h2>
+
+
+    {% for column in question %}
         <tr>
-            <td>{{ answers.message | safe }}</td>
+            <th>Title</th>
+            <td>{{ column.title | safe }}</td></br>
+        </tr>
+        <tr>
+            <th>Message</th>
+            <td>{{ column.message | safe }}</td></br>
         </tr>
     {% endfor %}
-</table>
+
+<h2>Answers</h2>
+    {% for answer in answers %}
+        <tr>
+            <th>Message</th>
+            <td>{{ answer.message | safe }}</td></br>
+        </tr>
+    {% endfor %}
+
 <a href="/list">
     <button type="button">Go back to main</button>
 </a><br>
