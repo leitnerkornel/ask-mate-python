@@ -11,36 +11,6 @@ def route_list():
     return render_template("index.html", questions=questions)
 
 
-@app.route('/list')
-def answer_and_message():
-    saved_answer = {}
-    saved_message = {}
-    answer_text = None
-    message_text = None
-    if 'answer' in saved_answer:
-        answer_text = saved_answer['answer']
-    if 'message' in saved_message:
-        message_text = saved_message['message']
-    return render_template("index.html", answer=answer_text, message=message_text)
-
-
-@app.route('/post-answer', methods=['GET', 'POST'])
-def route_post():
-    saved_answer = {}
-    saved_titles = {}
-    if request.method == 'POST':
-        saved_titles['title'] = request.form['title']
-        saved_answer['answer'] = request.form['answer']
-        return redirect('/list')
-    answer_text = None
-    answer_title = None
-    if 'answer' in saved_answer:
-        answer_text = saved_answer['answer']
-    if 'title' in saved_titles:
-        answer_title = saved_titles['title']
-    return render_template('answer.html', answer=answer_text, title=answer_title)
-
-
 @app.route('/add-question', methods=['GET', 'POST'])
 def route_add():
     saved_message = {}
@@ -60,10 +30,19 @@ def route_add():
 
 @app.route('/question/<question_id>', methods=['GET', 'POST'])
 def route_question(question_id):
-    answers_list = []
     question = data_manager.get_question_by_id(question_id)
     answers = data_manager.get_answers_by_question_id(question_id)
     return render_template('question.html', question=question, answers=answers)
+
+
+@app.route('/question/<question_id>/new-answer', methods=['GET', 'POST'])
+def route_post(question_id):
+    question = data_manager.get_question_by_id(question_id)
+    if request.method == 'POST':
+        saved_answer = request.form['answer']
+        data_manager.save_answers_to_question(saved_answer, question_id)
+        return redirect(f"/question/{question_id}")
+    return render_template('answer.html', question=question)
 
 
 if __name__ == '__main__':
