@@ -33,6 +33,15 @@ def route_question(question_id):
     return render_template('question.html', question=question, answers=answers)
 
 
+@app.route('/question/<question_id>', methods=['DELETE'])
+def delete_question(question_id):
+    question = data_manager.get_question_by_id(question_id)
+    if request.method == 'DELETE':
+        data_manager.delete_question(question_id)
+        return redirect('/')
+    return render_template('question.html', question=question)
+
+
 @app.route('/question/<question_id>/new-answer', methods=['GET', 'POST'])
 def route_post(question_id):
     question = data_manager.get_question_by_id(question_id)

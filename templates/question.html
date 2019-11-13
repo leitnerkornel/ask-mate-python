@@ -33,5 +33,8 @@
 <a href="{{ url_for('route_post', question_id=question['id']) }}">
     <button type="button">Post an answer</button>
 </a>
+<a href="{{ url_for('delete_question', question_id=question['id']) }}">
+    <button type="button">Delete question</button>
+</a>
 </body>
 </html>

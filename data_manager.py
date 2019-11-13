@@ -47,6 +47,7 @@ def get_last_five_question(cursor):
     questions = cursor.fetchall()
     return questions
 
+
 @connection.connection_handler
 def add_question(cursor, question_title, question_message):
     cursor.execute("""
@@ -54,7 +55,7 @@ def add_question(cursor, question_title, question_message):
                         (title, message)
                         VALUES (%(question_title)s, %(question_message)s) ;
                        """,
-                    {'question_title':question_title, 'question_message': question_message})
+                   {'question_title': question_title, 'question_message': question_message})
 
 
 @connection.connection_handler
@@ -64,6 +65,15 @@ def save_answers_to_question(cursor, answer_text, question_id):
                         VALUES (%(answer_text)s, %(question_id)s)
                     """,
                    {'answer_text': answer_text, 'question_id': question_id})
+
+
+@connection.connection_handler
+def delete_question(cursor, question_id):
+    cursor.execute("""
+                        DELETE FROM question
+                        WHERE id = %(question_id)s;
+                    """,
+                   {'question_id': question_id})
 
 
 def convert_epoch_time(time):
