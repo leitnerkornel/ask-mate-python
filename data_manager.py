@@ -60,12 +60,12 @@ def add_question(cursor, question_title, question_message, submission_time):
 
 
 @connection.connection_handler
-def save_answers_to_question(cursor, answer_text, question_id):
+def save_answers_to_question(cursor, answer_text, question_id, submission_time):
     cursor.execute("""
-                        INSERT INTO answer(message, question_id)
-                        VALUES (%(answer_text)s, %(question_id)s)
+                        INSERT INTO answer(message, question_id, submission_time)
+                        VALUES (%(answer_text)s, %(question_id)s, %(submission_time)s)
                     """,
-                   {'answer_text': answer_text, 'question_id': question_id})
+                   {'answer_text': answer_text, 'question_id': question_id, 'submission_time': submission_time})
 
 
 @connection.connection_handler
