@@ -21,7 +21,8 @@ def route_add():
     if request.method == "POST":
         question_title = request.form['title']
         question_message = request.form['note']
-        data_manager.add_question(question_title, question_message)
+        submission_time = data_manager.get_time()
+        data_manager.add_question(question_title, question_message, submission_time)
         return redirect('/')
     return render_template('message.html')
 
@@ -45,7 +46,8 @@ def route_post(question_id):
     question = data_manager.get_question_by_id(question_id)
     if request.method == 'POST':
         saved_answer = request.form['answer']
-        data_manager.save_answers_to_question(saved_answer, question_id)
+        submission_time = data_manager.get_time()
+        data_manager.save_answers_to_question(saved_answer, question_id, submission_time)
         return redirect(f"/question/{question_id}")
     return render_template('answer.html', question=question)
 
