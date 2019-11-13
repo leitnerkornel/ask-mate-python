@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>@skm@t3</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/question_mark.ico') }}">
+</head>
+<body>
+    <h1>@skm@t3</h1></br>
+
+    <h2>Questions and Answers</h2></br>
+
+    <a href="{{ url_for('route_add') }}">
+        <button type="button">Ask a question</button>
+    </a><br>
+
+    {% block content %} {% endblock %}
+
+</body>
+</html>

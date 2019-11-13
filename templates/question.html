@@ -1,23 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Questions</title>
-</head>
-<body>
-<h2>Question</h2>
+{% extends "layout.html" %}
 
-<tr>
-    <th>Title</th>
-    <td>{{ question.title | safe }}</td>
-    </br>
-</tr>
-<tr>
-    <th>Message</th>
-    <td>{{ question.message | safe }}</td>
-    </br>
-</tr>
+{% block content %}
 
+    <h2>Question</h2>
+
+    <tr>
+        <th>Title</th>
+        <td>{{ question.title | safe }}</td></br>
+    </tr>
+    <tr>
+        <th>Message</th>
+        <td>{{ question.message | safe }}</td></br>
+    </tr>
+
+    <h2>Answers</h2>
+    {% for answer in answers %}
+        <tr>
+            <th>Message</th>
+            <td>{{ answer.message | safe }}</td></br>
+        </tr>
+    {% endfor %}
 <h2>Answers</h2>
 {% for answer in answers %}
     <tr>
@@ -28,14 +30,14 @@
     </tr>
 {% endfor %}
 
-<a href="/list">
-    <button type="button">Go back to main</button>
-</a><br>
-<a href="{{ url_for('route_post', question_id=question['id']) }}">
-    <button type="button">Post an answer</button>
-</a>
-<a href="{{ url_for('delete_question', question_id=question['id']) }}">
-    <button type="button">Delete question</button>
-</a>
-</body>
-</html>
+    <a href="/list">
+        <button type="button">Go back to main</button>
+    </a><br>
+    <a href="{{ url_for('route_post', question_id=question['id']) }}">
+        <button type="button">Post an answer</button>
+    </a>
+    <a href="{{ url_for('delete_question', question_id=question['id']) }}">
+        <button type="button">Delete question</button>
+    </a>
+
+{% endblock %}
