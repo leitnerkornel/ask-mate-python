@@ -21,7 +21,8 @@ def route_add():
     if request.method == "POST":
         question_title = request.form['title']
         question_message = request.form['note']
-        data_manager.add_question(question_title, question_message)
+        submission_time = data_manager.get_time()
+        data_manager.add_question(question_title, question_message, submission_time)
         return redirect('/')
     return render_template('message.html')
 

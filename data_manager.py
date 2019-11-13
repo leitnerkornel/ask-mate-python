@@ -49,13 +49,14 @@ def get_last_five_question(cursor):
 
 
 @connection.connection_handler
-def add_question(cursor, question_title, question_message):
+def add_question(cursor, question_title, question_message, submission_time):
     cursor.execute("""
                         INSERT INTO question 
-                        (title, message)
-                        VALUES (%(question_title)s, %(question_message)s) ;
+                        (title, message, submission_time)
+                        VALUES (%(question_title)s, %(question_message)s, %(submission_time)s) ;
                        """,
-                   {'question_title': question_title, 'question_message': question_message})
+                   {'question_title': question_title, 'question_message': question_message,
+                    'submission_time': submission_time})
 
 
 @connection.connection_handler
@@ -76,10 +77,9 @@ def delete_question(cursor, question_id):
                    {'question_id': question_id})
 
 
-def convert_epoch_time(time):
-    return datetime.fromtimestamp(
-        int(time)
-    ).strftime('%Y-%m-%d %H:%M:%S')
+def get_time():
+    now = datetime.now()
+    return now.strftime('%Y-%m-%d %H:%M:%S')
 
 
 def generate_next_id(list_of_q_or_a):
