@@ -3,6 +3,15 @@ body {
     color: white;
 }
 
+.main_table{
+    width: 80%;
+    margin: 0px auto;
+}
+.main_table tr{
+    background-color: white;
+    color: #404040;
+    border: 2px;
+}
 h1 {
     color: #000000;
     font-family: arial, sans-serif;
