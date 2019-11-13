@@ -76,6 +76,16 @@ def delete_question(cursor, question_id):
                    {'question_id': question_id})
 
 
+@connection.connection_handler
+def delete_answer(cursor, question_id):
+    cursor.execute("""
+                        DELETE FROM answer
+                        WHERE question_id = %(question_id)s;
+                    """,
+                   {'question_id': question_id})
+
+
+
 def convert_epoch_time(time):
     return datetime.fromtimestamp(
         int(time)
