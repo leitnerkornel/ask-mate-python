@@ -20,7 +20,7 @@ def all_question():
     elif order == 'message':
         order_by = 'message'
     else:
-        order_by = 'title'
+        order_by = 'submission_time'
     questions = data_manager.get_questions(order_by)
     return render_template("list_questions.html", questions=questions)
 
