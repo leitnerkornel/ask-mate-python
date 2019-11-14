@@ -327,6 +327,5 @@ h5 {
 }
 
 .order {
-    position: absolute;
-    right: 50px;
+    position: center;
 }
