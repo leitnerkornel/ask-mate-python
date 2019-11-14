@@ -1,5 +1,5 @@
 body {
-    background-color: #f49f05;
+    background-color: grey;
     color: white;
 }
 
@@ -84,11 +84,15 @@ h5 {
     font-family: Courier New, monospace;
 }
 
-.delete_button {
+.buttons_question {
+    align-content: center;
+    width: 80%;
+    margin: 0px auto;
+}
+
+.buttons_question #delete_button {
     box-shadow: inset 0px 0px 0px 0px #cf866c;
-    background: linear-gradient(to bottom, #d0451b 5%, #e34829 100%);
-    background-color: #d0451b;
-    border: 1px solid #942911;
+    background: #d0451b linear-gradient(to bottom, #d0451b 5%, #e34829 100%);
     display: inline-block;
     cursor: pointer;
     color: #ffffff;
@@ -100,21 +104,18 @@ h5 {
     text-shadow: 0px 0px 0px #854629;
 }
 
-.delete_button:hover {
-    background: linear-gradient(to bottom, #e34829 5%, #d0451b 100%);
-    background-color: #e34829;
+.buttons_question #delete_button:hover {
+    background: #e34829 linear-gradient(to bottom, #e34829 5%, #d0451b 100%);
 }
 
-.delete_button:active {
+.buttons_question #delete_button:active {
     position: relative;
     top: 1px;
 }
 
-.post_answer_button {
-    box-shadow: inset 0px 0px 0px 0px #cf866c;
-    background: linear-gradient(to bottom, #d0451b 5%, #e34829 100%);
-    background-color: #d0451b;
-    border: 1px solid #942911;
+.buttons_question #post_answer_button {
+    box-shadow: inset 0px 0px 0px 0px #3dc21b;
+    background: #44c767 linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
     display: inline-block;
     cursor: pointer;
     color: #ffffff;
@@ -126,12 +127,34 @@ h5 {
     text-shadow: 0px 0px 0px #854629;
 }
 
-.post_answer_button:hover {
-    background: linear-gradient(to bottom, #e34829 5%, #d0451b 100%);
-    background-color: #e34829;
+.buttons_question #post_answer_button:hover {
+    background: #5cbf2a linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
 }
 
-.post_answer_button:active {
+.buttons_question #post_answer_button:active {
+    position: relative;
+    top: 1px;
+}
+
+.buttons_question #go_back {
+    box-shadow: inset 0px 0px 0px 0px #cf866c;
+    background: #d0451b linear-gradient(to bottom, #d0451b 5%, #e34829 100%);
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 16px 29px;
+    text-decoration: none;
+    text-shadow: 0px 0px 0px #854629;
+}
+
+.buttons_question #go_back:hover {
+    background: #e34829 linear-gradient(to bottom, #e34829 5%, #d0451b 100%);
+}
+
+.buttons_question #go_back:active {
     position: relative;
     top: 1px;
 }
@@ -143,9 +166,7 @@ h5 {
 
 .buttons #go_back_main {
     box-shadow: inset 0px 0px 0px 0px #cf866c;
-    background: linear-gradient(to bottom, #d0451b 5%, #e34829 100%);
-    background-color: #d0451b;
-    border: 1px solid #942911;
+    background: #d0451b linear-gradient(to bottom, #d0451b 5%, #e34829 100%);
     display: inline-block;
     cursor: pointer;
     color: #ffffff;
@@ -158,8 +179,7 @@ h5 {
 }
 
 .buttons #go_back_main:hover {
-    background: linear-gradient(to bottom, #e34829 5%, #d0451b 100%);
-    background-color: #e34829;
+    background: #e34829 linear-gradient(to bottom, #e34829 5%, #d0451b 100%);
 }
 
 .buttons #go_back_main:active {
@@ -169,9 +189,8 @@ h5 {
 
 .buttons #ask_question {
     box-shadow: inset 0px 0px 0px 0px #3dc21b;
-    background: linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
-    background-color: #44c767;
-    border: 1px solid #18ab29;
+    background: #44c767 linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+    text-shadow: 0px 0px 0px #2f6627;
     display: inline-block;
     cursor: pointer;
     color: #ffffff;
@@ -180,12 +199,11 @@ h5 {
     font-weight: bold;
     padding: 16px 29px;
     text-decoration: none;
-    text-shadow: 0px 0px 0px #2f6627;
+    text-shadow: 0px 0px 0px #854629;
 }
 
 .buttons #ask_question:hover {
-    background: linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
-    background-color: #5cbf2a;
+    background: #5cbf2a linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
 }
 
 .buttons #ask_question:active {
@@ -199,8 +217,7 @@ h5 {
 
 .add_question #go_back_main {
     box-shadow: inset 0px 0px 0px 0px #3dc21b;
-    background: linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
-    background-color: #44c767;
+    background: #44c767 linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
     border: 1px solid #18ab29;
     display: inline-block;
     cursor: pointer;
@@ -214,8 +231,7 @@ h5 {
 }
 
 .add_question #go_back_main {
-    background: linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
-    background-color: #5cbf2a;
+    background: #5cbf2a linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
 }
 
 .add_question #go_back_main {
