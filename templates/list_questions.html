@@ -12,21 +12,15 @@
             </a></td>
         </tr>
     </table>
-    <table class="order">
-        <tr>
-            <td>Sort questions by</td>
-            <td><select name="order" form="order_by" id="order_by">
-                <option value="title">Title</option>
-                <option value="message">Message</option>
-                <option value="submission_time">Submission time</option>
-            </select></td>
-            <td>
-                <form action="/list" id="order_by" method="GET">
-                    <input type="submit" id="submit" value="Sort">
-                </form>
-            </td>
-        </tr>
-    </table>
+
+    <select onchange="this.form.submit()" name="order" form="order_by">
+        <option value="title">Sort by...</option>
+        <option value="title">Title</option>
+        <option value="message">Message</option>
+        <option value="submission_time">Submission time</option>
+    </select>
+    <form action="/list" id="order_by" method="GET"></form>
+
 
     <h2>All questions: newest first</h2>
 
