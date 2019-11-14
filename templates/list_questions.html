@@ -12,47 +12,49 @@
             </a></td>
         </tr>
     </table>
+    <table class="order">
+        <tr>
+            <td>Sort questions by</td>
+            <td><select name="order" form="order_by" id="order_by">
+                <option value="title">Title</option>
+                <option value="message">Message</option>
+                <option value="submission_time">Submission time</option>
+            </select></td>
+            <td>
+                <form action="/list" id="order_by" method="GET">
+                    <input type="submit" id="submit" value="Sort">
+                </form>
+            </td>
+        </tr>
+    </table>
 
     <h2>All questions: newest first</h2>
 
-    <h4> Sort questions by  </h4>
-
-    <select name="order" form="order_by">
-        <option value="title">Title</option>
-        <option value="message">Message</option>
-        <option value="submission_time">Submission time</option>
-    </select>
-    <form action="/list" id="order_by" method="GET">
-        <input type="submit" value="Sort">
-    </form>
-
-
-
     <table border="1">
-    <table class="main_table">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Message</th>
-            <th>Submission Time</th>
-            <th>Image</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for question in questions %}
+        <table class="main_table">
+            <thead>
             <tr>
-                <td><a
-                        href="{{ url_for("route_question", question_id=question['id']) }}">{{ question.title }}</a></td>
-                <td> {{ question.message | safe }}</td>
-                <td> {{ question.submission_time }} </td>
-                {% if question.image %}
-                    <td><img src="./static/{{ question.image }}" width="80" height="80"></td>
-                {% else %}
-                    <td></td>
-                {% endif %}
+                <th>Title</th>
+                <th>Message</th>
+                <th>Submission Time</th>
+                <th>Image</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table></br>
-
+            </thead>
+            <tbody>
+            {% for question in questions %}
+                <tr>
+                    <td><a
+                            href="{{ url_for("route_question", question_id=question['id']) }}">{{ question.title }}</a>
+                    </td>
+                    <td> {{ question.message | safe }}</td>
+                    <td> {{ question.submission_time }} </td>
+                    {% if question.image %}
+                        <td><img src="./static/{{ question.image }}" width="80" height="80"></td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 {% endblock %}
