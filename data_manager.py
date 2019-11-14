@@ -28,11 +28,17 @@ def get_question_by_id(cursor, question_id):
 
 
 @connection.connection_handler
-def get_questions(cursor):
+def get_questions(cursor, order_by):
     cursor.execute("""
-                        SELECT * FROM question
-                        ORDER BY submission_time DESC;
-                   """)
+                SELECT * FROM question
+                ORDER BY 
+                    CASE 
+                        WHEN (%(order_by)s = 'title') THEN title 
+                        WHEN (%(order_by)s = 'message') THEN message 
+                    END;
+                   """,
+                   {'order_by': order_by})
+
     questions = cursor.fetchall()
     return questions
 
@@ -80,6 +86,8 @@ def delete_question(cursor, question_id):
 def get_time():
     now = datetime.now()
     return now.strftime('%Y-%m-%d %H:%M:%S')
+
+
 @connection.connection_handler
 def delete_answer(cursor, question_id):
     cursor.execute("""
@@ -88,12 +96,6 @@ def delete_answer(cursor, question_id):
                     """,
                    {'question_id': question_id})
 
-
-
-def convert_epoch_time(time):
-    return datetime.fromtimestamp(
-        int(time)
-    ).strftime('%Y-%m-%d %H:%M:%S')
 
 
 def convert_linebreaks_to_br(original_str):

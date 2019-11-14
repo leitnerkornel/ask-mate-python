@@ -12,7 +12,16 @@ def last_five_question():
 
 @app.route('/list')
 def all_question():
-    questions = data_manager.get_questions()
+    order = request.args.get('order')
+    if order == 'title':
+        order_by = 'title'
+    elif order == 'submission_time':
+        order_by = 'submission_time'
+    elif order == 'message':
+        order_by = 'message'
+    else:
+        order_by = 'title'
+    questions = data_manager.get_questions(order_by)
     return render_template("list_questions.html", questions=questions)
 
 

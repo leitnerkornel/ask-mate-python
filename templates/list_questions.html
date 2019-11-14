@@ -15,6 +15,20 @@
 
     <h2>All questions: newest first</h2>
 
+    <h4> Sort questions by  </h4>
+
+    <select name="order" form="order_by">
+        <option value="title">Title</option>
+        <option value="submission_time">Submission time</option>
+        <option value="message">Message</option>
+    </select>
+    <form action="/list" id="order_by" method="GET">
+        <input type="submit" value="Sort">
+    </form>
+
+
+
+    <table border="1">
     <table class="main_table">
         <thead>
         <tr>
