@@ -243,3 +243,11 @@ h5 {
     align-content: center;
     margin-left: 34%;
 }
+
+.order #order_by {
+    color: black;
+    font-family: Arial;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 16px 29px;
+}
