@@ -2,12 +2,28 @@
 
 {% block content %}
 
-    <h3>Post an answer</h3>
+    <h3>The question is:</h3>
+
+    <table class="main_table">
+        <thead>
+        <tr>
+            <th align="center">Title</th>
+            <th align="center">Message</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td align="center"> {{ question.title }} </td>
+            <td align="center"> {{ question.message }} </td>
+        </tr>
+        </tbody>
+    </table></br>
+
+    <h3>Post your answer</h3></br>
     <form action="/question/{{ question.id }}/new-answer" method="POST">
-        <label for="answer-input">Your answer:</label><br/>
         <textarea id="answer-input" name="answer" rows="8" cols="80" required
-                  placeholder="Write your answer here"></textarea><br/>
-        <button type="submit", class="post_answer_button">Save answer</button>
+                  placeholder="Write your answer here"></textarea></br>
+        <button type="submit", class="post_answer_button">Save answer</button></br>
     </form>
 
 {% endblock %}
