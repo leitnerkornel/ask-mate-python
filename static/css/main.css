@@ -1,5 +1,5 @@
 body {
-    background-color: grey;
+    background-image: url("/static/images/autum_background.jpg");
     color: white;
 }
 
@@ -50,6 +50,7 @@ h1 {
     font-weight: bold;
     margin-top: 0px;
     margin-bottom: 1px;
+    text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #000, 1px 1px 0 #FFF;
 }
 
 h2 {
@@ -72,16 +73,19 @@ h2 {
 h3 {
     text-align: center;
     font-family: Courier New, monospace;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 h4 {
     text-align: center;
     font-family: Courier New, monospace;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 h5 {
     text-align: center;
     font-family: Courier New, monospace;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .buttons_question {
