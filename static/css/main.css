@@ -1,5 +1,5 @@
 body {
-    background-image: url("/static/images/autum_background.jpg");
+    background-image: url("https://images.wallpaperscraft.com/image/question_marks_figures_3d_112755_1920x1080.jpg");
     color: white;
 }
 
@@ -68,6 +68,7 @@ h2 {
     font-variant: small-caps;
     text-transform: none;
     margin: 0px auto;
+    text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #000, 1px 1px 0 #FFF
 }
 
 h3 {
