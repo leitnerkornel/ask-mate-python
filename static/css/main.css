@@ -49,13 +49,13 @@ tbody tr td:first-child {
 
 h1 {
     text-align: center;
-    color: #000000;
+    color: #FFFFFF;
     font-family: arial, sans-serif;
     font-size: 60px;
     font-weight: bold;
     margin-top: 0px;
     margin-bottom: 1px;
-    text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #000, 1px 1px 0 #FFF;
+    text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
 }
 
 h2 {
@@ -66,14 +66,14 @@ h2 {
     font-size: 28px;
     letter-spacing: -2.2px;
     word-spacing: 1.8px;
-    color: #000000;
+    color: #ffffff;
     font-weight: 400;
     text-decoration: none solid rgb(68, 68, 68);
     font-style: italic;
     font-variant: small-caps;
     text-transform: none;
     margin: 0px auto;
-    text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #000, 1px 1px 0 #FFF
+    text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000
 }
 
 h3 {
@@ -170,6 +170,7 @@ h5 {
 }
 
 .buttons {
+    position: absolute;
     align-content: center;
     margin-left: 37%;
 }
@@ -325,15 +326,7 @@ h5 {
     top: 1px;
 }
 
-/*.order {*/
-/*    align-content: center;*/
-/*    margin-left: 34%;*/
-/*}*/
-
-/*.order #order_by {*/
-/*    color: black;*/
-/*    font-family: Arial;*/
-/*    font-size: 13px;ost kezd elfogni*/
-/*    font-weight: bold;*/
-/*    padding: 16px 29px;*/
-/*}*/
+.order {
+    position: absolute;
+    right: 50px;
+}
