@@ -4,6 +4,7 @@ body {
 }
 
 .main_table {
+    align-content: center;
     width: 80%;
     margin: 0px auto;
 }
@@ -12,6 +13,11 @@ body {
     background-color: white;
     color: #404040;
     border: 2px;
+}
+
+.main_table thead tr th:first-child,
+tbody tr td:first-child {
+    width: 25%;
 }
 
 .question_table {
@@ -37,6 +43,7 @@ body {
 }
 
 h1 {
+    text-align: center;
     color: #000000;
     font-family: arial, sans-serif;
     font-size: 60px;
@@ -46,6 +53,9 @@ h1 {
 }
 
 h2 {
+    position: relative;
+    left: -25%;
+    text-align: center;
     font-family: "Arial Black", Gadget, sans-serif;
     font-size: 28px;
     letter-spacing: -2.2px;
@@ -56,50 +66,69 @@ h2 {
     font-style: italic;
     font-variant: small-caps;
     text-transform: none;
+    margin: 0px auto;
+}
+
+h3 {
+    text-align: center;
+    font-family: Courier New, monospace;
+}
+
+h4 {
+    text-align: center;
+    font-family: Courier New, monospace;
+}
+
+h5 {
+    text-align: center;
+    font-family: Courier New, monospace;
 }
 
 .delete_button {
-	box-shadow:inset 0px 0px 0px 0px #cf866c;
-	background: linear-gradient(to bottom, #d0451b 5%, #e34829 100%);
-	background-color: #d0451b;
-	border:1px solid #942911;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:13px;
-	font-weight:bold;
-	padding:16px 29px;
-	text-decoration:none;
-	text-shadow:0px 0px 0px #854629;
+    box-shadow: inset 0px 0px 0px 0px #cf866c;
+    background: linear-gradient(to bottom, #d0451b 5%, #e34829 100%);
+    background-color: #d0451b;
+    border: 1px solid #942911;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 16px 29px;
+    text-decoration: none;
+    text-shadow: 0px 0px 0px #854629;
 }
+
 .delete_button:hover {
-	background: linear-gradient(to bottom, #e34829 5%, #d0451b 100%);
-	background-color: #e34829;
+    background: linear-gradient(to bottom, #e34829 5%, #d0451b 100%);
+    background-color: #e34829;
 }
+
 .delete_button:active {
-	position:relative;
-	top:1px;
+    position: relative;
+    top: 1px;
 }
 
 .post_answer_button {
-	box-shadow:inset 0px 0px 0px 0px #cf866c;
-	background: linear-gradient(to bottom, #d0451b 5%, #e34829 100%);
-	background-color: #d0451b;
-	border:1px solid #942911;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:13px;
-	font-weight:bold;
-	padding:16px 29px;
-	text-decoration:none;
-	text-shadow:0px 0px 0px #854629;
+    box-shadow: inset 0px 0px 0px 0px #cf866c;
+    background: linear-gradient(to bottom, #d0451b 5%, #e34829 100%);
+    background-color: #d0451b;
+    border: 1px solid #942911;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 16px 29px;
+    text-decoration: none;
+    text-shadow: 0px 0px 0px #854629;
 }
+
 .post_answer_button:hover {
-	background: linear-gradient(to bottom, #e34829 5%, #d0451b 100%);
-	background-color: #e34829;
+    background: linear-gradient(to bottom, #e34829 5%, #d0451b 100%);
+    background-color: #e34829;
 }
 
 .post_answer_button:active {
@@ -107,51 +136,89 @@ h2 {
     top: 1px;
 }
 
-.back_to_main_button {
-	box-shadow:inset 0px 0px 0px 0px #cf866c;
-	background: linear-gradient(to bottom, #d0451b 5%, #e34829 100%);
-	background-color: #d0451b;
-	border:1px solid #942911;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:13px;
-	font-weight:bold;
-	padding:16px 29px;
-	text-decoration:none;
-	text-shadow:0px 0px 0px #854629;
-}
-.back_to_main_button:hover {
-	background: linear-gradient(to bottom, #e34829 5%, #d0451b 100%);
-	background-color: #e34829;
+.buttons {
+    align-content: center;
+    margin-left: 37%;
 }
 
-.back_to_main_button:active {
+.buttons #go_back_main {
+    box-shadow: inset 0px 0px 0px 0px #cf866c;
+    background: linear-gradient(to bottom, #d0451b 5%, #e34829 100%);
+    background-color: #d0451b;
+    border: 1px solid #942911;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 16px 29px;
+    text-decoration: none;
+    text-shadow: 0px 0px 0px #854629;
+}
+
+.buttons #go_back_main:hover {
+    background: linear-gradient(to bottom, #e34829 5%, #d0451b 100%);
+    background-color: #e34829;
+}
+
+.buttons #go_back_main:active {
     position: relative;
     top: 1px;
 }
 
-.ask_question {
-	box-shadow:inset 0px 0px 0px 0px #3dc21b;
-	background:linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
-	background-color:#44c767;
-	border:1px solid #18ab29;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:13px;
-	font-weight:bold;
-	padding:16px 29px;
-	text-decoration:none;
-	text-shadow:0px 0px 0px #2f6627;
+.buttons #ask_question {
+    box-shadow: inset 0px 0px 0px 0px #3dc21b;
+    background: linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+    background-color: #44c767;
+    border: 1px solid #18ab29;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 16px 29px;
+    text-decoration: none;
+    text-shadow: 0px 0px 0px #2f6627;
 }
-.ask_question:hover {
-	background:linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
-	background-color:#5cbf2a;
+
+.buttons #ask_question:hover {
+    background: linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
+    background-color: #5cbf2a;
 }
-.ask_question:active {
-	position:relative;
-	top:1px;
+
+.buttons #ask_question:active {
+    position: relative;
+    top: 1px;
+}
+
+.add_question {
+    text-align: center;
+}
+
+.add_question #go_back_main {
+    box-shadow: inset 0px 0px 0px 0px #3dc21b;
+    background: linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+    background-color: #44c767;
+    border: 1px solid #18ab29;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 16px 29px;
+    text-decoration: none;
+    text-shadow: 0px 0px 0px #2f6627;
+}
+
+.add_question #go_back_main {
+    background: linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
+    background-color: #5cbf2a;
+}
+
+.add_question #go_back_main {
+    position: relative;
+    top: 1px;
 }

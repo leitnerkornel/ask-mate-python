@@ -3,13 +3,18 @@
 {% block content %}
 
     <h3>Ask a question</h3>
-
-    <form action="/add-question" method="post">
-        <label for="title-input">Title:</label><br/>
-        <textarea id="title-input" name="title" rows="1" cols="40" required placeholder="Short description"></textarea><br/>
-        <label for="note-input">Message:</label> <br/>
-        <textarea id="note-input" name="note" rows="8" cols="80" required placeholder="Write your question here"></textarea><br/>
-        <button type="submit", class="post_answer_button">Save message</button>
-    </form>
-
+    <div class="add_question">
+        <form action="/add-question" method="post">
+            <label for="title-input">Title:</label><br/>
+            <textarea id="title-input" name="title" rows="1" cols="40" required
+                      placeholder="Short description"></textarea><br/>
+            <label for="note-input">Message:</label> <br/>
+            <textarea id="note-input" name="note" rows="8" cols="80" required
+                      placeholder="Write your question here"></textarea><br/>
+            <button type="submit" , class="post_answer_button">Save message</button>
+            <a href="{{ url_for('all_question') }}">
+                <button type="button" id="go_back_main">See all question</button>
+            </a>
+        </form>
+    </div>
 {% endblock %}
