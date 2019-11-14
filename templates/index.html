@@ -1,10 +1,18 @@
 {% extends "layout.html" %}
 
 {% block content %}
+    <table class="buttons">
+        <tr>
+            <td><a href="{{ url_for('route_add') }}">
+                <button type="button" id="ask_question">Ask a question</button>
+            </a></td>
+            <td><a href="{{ url_for('all_question') }}">
+                <button type="button" id="go_back_main">See all question</button>
+            </a></td>
+        </tr>
+    </table>
 
-    <h2>The last 5 questions</h2>
-
-    <h3>The last 5 questions, newest first</h3>
+    <h2>The last 5 questions: newest first</h2>
 
     <table class="main_table">
         <thead>
@@ -18,10 +26,10 @@
         <tbody>
         {% for question in questions %}
             <tr>
-                <td align="center"><a
+                <td><a
                         href="{{ url_for("route_question", question_id=question['id']) }}">{{ question.title }}</a></td>
                 <td> {{ question.message | safe }}</td>
-                <td align="center"> {{ question.submission_time }} </td>
+                <td> {{ question.submission_time }} </td>
                 {% if question.image %}
                     <td><img src="./static/{{ question.image }}" width="80" height="80"></td>
                 {% else %}
@@ -31,9 +39,5 @@
         {% endfor %}
         </tbody>
     </table></br>
-
-    <a href="{{ url_for('all_question') }}">
-        <button type="button" class="back_to_main_button">See all question</button>
-    </a></br>
 
 {% endblock %}
