@@ -20,19 +20,16 @@
     </table></br>
 
     <h3>Post your answer</h3></br>
-    <table>
-        <tr>
-            <form action="/question/{{ question.id }}/new-answer" method="POST">
-                <td><textarea id="answer-input" name="answer" rows="8" cols="80" required
-                              placeholder="Write your answer here"></textarea></td>
-                <td>
-                    <button type="submit" , id="post_answer_button">Save answer</button>
-            </td>
-            <td>
-                <a href="/question/{{ question.id }}"></a>
-                <button type="button" , id="go_back_to_question">Go back to question</button>
-            </form></td>
-        </tr>
-    </table>
+    <div class="answer">
+        <form action="/question/{{ question.id }}/new-answer" method="POST">
+            <textarea id="answer-input" name="answer" rows="8" cols="80" required
+                      placeholder="Write your answer here"></textarea><br/>
+            <button type="submit", id="post_answer_button">Save answer</button>
+            <a href="/question/{{ question.id }}"></a>
+            <button type="button", id="go_back_to_question">Go back to question</button>
+        </form>
+    </div>
+
+
 
 {% endblock %}

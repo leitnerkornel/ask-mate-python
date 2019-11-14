@@ -239,15 +239,91 @@ h5 {
     top: 1px;
 }
 
-.order {
-    align-content: center;
-    margin-left: 34%;
-}
-
-.order #order_by {
-    color: black;
+.add_question #post_answer_button {
+    box-shadow: inset 0px 0px 0px 0px #3dc21b;
+    background: #44c767 linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+    border: 1px solid #18ab29;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
     font-family: Arial;
     font-size: 13px;
     font-weight: bold;
     padding: 16px 29px;
+    text-decoration: none;
+    text-shadow: 0px 0px 0px #2f6627;
 }
+
+.add_question #post_answer_button:hover {
+    background: #5cbf2a linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
+}
+
+.add_question #post_answer_button:active {
+    position: relative;
+    top: 1px;
+}
+
+.answer {
+    text-align: center;
+}
+
+.answer #post_answer_button {
+    box-shadow: inset 0px 0px 0px 0px #3dc21b;
+    background: #44c767 linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+    border: 1px solid #18ab29;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 16px 29px;
+    text-decoration: none;
+    text-shadow: 0px 0px 0px #2f6627;
+}
+
+.answer #post_answer_button:hover {
+    background: #5cbf2a linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
+}
+
+.answer #post_answer_button:active {
+    position: relative;
+    top: 1px;
+}
+
+.answer #go_back_to_question {
+    box-shadow: inset 0px 0px 0px 0px #3dc21b;
+    background: #44c767 linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+    border: 1px solid #18ab29;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 16px 29px;
+    text-decoration: none;
+    text-shadow: 0px 0px 0px #2f6627;
+}
+
+.answer #go_back_to_question:hover {
+    background: #5cbf2a linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
+}
+
+.answer #go_back_to_question:active {
+    position: relative;
+    top: 1px;
+}
+
+/*.order {*/
+/*    align-content: center;*/
+/*    margin-left: 34%;*/
+/*}*/
+
+/*.order #order_by {*/
+/*    color: black;*/
+/*    font-family: Arial;*/
+/*    font-size: 13px;ost kezd elfogni*/
+/*    font-weight: bold;*/
+/*    padding: 16px 29px;*/
+/*}*/
