@@ -6,7 +6,7 @@
 
     <h3>All the question, newest first</h3>
 
-    <table border="1">
+    <table class="main_table">
         <thead>
         <tr>
             <th>ID</th>
@@ -39,7 +39,7 @@
     </table></br>
 
     <a href="{{ url_for('last_five_question') }}">
-        <button type="button">Go back to main</button>
+        <button type="button" class="back_to_main_button">Go back to main</button>
     </a><br>
 
 {% endblock %}

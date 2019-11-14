@@ -6,28 +6,22 @@
 
     <h3>The last 5 questions, newest first</h3>
 
-    <table border="1">
+    <table class="main_table">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Submission Time</th>
-            <th>View Number</th>
-            <th>Vote Number</th>
             <th>Title</th>
             <th>Message</th>
+            <th>Posted</th>
             <th>Image</th>
         </tr>
         </thead>
         <tbody>
         {% for question in questions %}
             <tr>
-                <td align="center"> {{ question.id }} </td>
-                <td align="center"> {{ question.submission_time }} </td>
-                <td align="center"> {{ question.view_number }} </td>
-                <td align="center"> {{ question.vote_number }}</td>
                 <td align="center"><a
                         href="{{ url_for("route_question", question_id=question['id']) }}">{{ question.title }}</a></td>
                 <td> {{ question.message | safe }}</td>
+                <td align="center"> {{ question.submission_time }} </td>
                 {% if question.image %}
                     <td><img src="./static/{{ question.image }}" width="80" height="80"></td>
                 {% else %}
@@ -39,7 +33,7 @@
     </table></br>
 
     <a href="{{ url_for('all_question') }}">
-        <button type="button">See all question</button>
+        <button type="button" class="back_to_main_button">See all question</button>
     </a></br>
 
 {% endblock %}

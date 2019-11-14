@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Ask a question</title>
-</head>
-<body>
-<h1>Ask a question</h1>
-<form action="/add-question" method="post">
-    <label for="title-input">Title:</label>
-    <textarea id="title-input" name="title" rows="1" cols="40" required placeholder="Short description"></textarea><br/>
-    <label for="note-input">Message:</label> <br/>
-    <textarea id="note-input" name="note" rows="8" cols="80" required placeholder="Write your question here"></textarea>
-    <button type="submit">Save message</button>
-</form>
-</body>
-</html>
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <h3>Ask a question</h3>
+
+    <form action="/add-question" method="post">
+        <label for="title-input">Title:</label><br/>
+        <textarea id="title-input" name="title" rows="1" cols="40" required placeholder="Short description"></textarea><br/>
+        <label for="note-input">Message:</label> <br/>
+        <textarea id="note-input" name="note" rows="8" cols="80" required placeholder="Write your question here"></textarea><br/>
+        <button type="submit", class="post_answer_button">Save message</button>
+    </form>
+
+{% endblock %}
