@@ -58,6 +58,13 @@ def route_post(question_id):
     return render_template('answer.html', question=question)
 
 
+@app.route('/search?q=<search phrase>')
+def list_search_result(search_phrase):
+    result = search_phrase
+    return render_template('search_result.html', result=result)
+    
+
+
 if __name__ == '__main__':
     app.run(
         host='0.0.0.0',

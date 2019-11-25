@@ -330,3 +330,8 @@ h5 {
     position: center;
     margin-left: 45%;
 }
+
+form {
+margin: 0 auto;
+width:250px;
+}
