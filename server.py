@@ -12,13 +12,13 @@ def last_numbered_question():
 
 @app.route('/list')
 def all_question():
-    allowed_order_options = ['title', 'submission_time', 'message']
+    allowed_order_options = ["title", "submission_time", "message"]
     order_by = request.args.get('order')
+    if order_by in allowed_order_options:
+        questions = data_manager.get_questions(order_by)
+    else:
+        questions = data_manager.get_questions(2)
 
-    if order_by not in allowed_order_options:
-        order_by = 'submission_time'
-
-    questions = data_manager.get_questions(order_by)
     return render_template("list_questions.html", questions=questions)
 
 
