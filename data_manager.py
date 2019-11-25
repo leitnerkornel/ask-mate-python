@@ -1,8 +1,5 @@
 import connection
-import os
 from datetime import datetime
-
-PATH = os.path.dirname(os.path.abspath(__file__))
 
 
 @connection.connection_handler
@@ -32,7 +29,7 @@ def get_questions(cursor, order_by):
     if order_by == 'title':
         cursor.execute("""
                     SELECT * FROM question
-                    ORDER BY title
+                    ORDER BY title;
                        """)
     elif order_by == 'message':
         cursor.execute("""
@@ -50,12 +47,13 @@ def get_questions(cursor, order_by):
 
 
 @connection.connection_handler
-def get_last_five_question(cursor):
+def get_numbered_question(cursor, numb_limit):
     cursor.execute("""
                    SELECT * FROM question
                    ORDER BY submission_time DESC
-                   LIMIT 5;
-                   """)
+                   LIMIT %(numb_limit)s;
+                   """,
+                   {'numb_limit': numb_limit})
     questions = cursor.fetchall()
     return questions
 
@@ -104,4 +102,4 @@ def delete_answer(cursor, question_id):
 
 
 def convert_linebreaks_to_br(original_str):
-    return '<br>'.join(original_str.split('\n'))
+    return '<br/>'.join(original_str.split('\n'))

@@ -5,22 +5,19 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def last_five_question():
-    five_question = data_manager.get_last_five_question()
-    return render_template("index.html", questions=five_question)
+def last_numbered_question():
+    numbered_question = data_manager.get_numbered_question(numb_limit=5)
+    return render_template("index.html", questions=numbered_question)
 
 
 @app.route('/list')
 def all_question():
-    order = request.args.get('order')
-    if order == 'title':
-        order_by = 'title'
-    elif order == 'submission_time':
+    allowed_order_options = ['title', 'submission_time', 'message']
+    order_by = request.args.get('order')
+
+    if order_by not in allowed_order_options:
         order_by = 'submission_time'
-    elif order == 'message':
-        order_by = 'message'
-    else:
-        order_by = 'submission_time'
+
     questions = data_manager.get_questions(order_by)
     return render_template("list_questions.html", questions=questions)
 
@@ -36,7 +33,7 @@ def route_add():
     return render_template('message.html')
 
 
-@app.route('/question/<question_id>', methods=['GET', 'POST'])
+@app.route('/question/<question_id>', methods=['GET'])
 def route_question(question_id):
     question = data_manager.get_question_by_id(question_id)
     answers = data_manager.get_answers_by_question_id(question_id)
