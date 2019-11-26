@@ -29,25 +29,7 @@ def get_questions(cursor, order_by):
     cursor.execute(f"""
                         SELECT * FROM question
                         ORDER BY {order_by};
-                        """,)
-
-
-    # if order_by == 'title':
-    #     cursor.execute("""
-    #                 SELECT * FROM question
-    #                 ORDER BY title;
-    #                    """)
-    # elif order_by == 'message':
-    #     cursor.execute("""
-    #                 SELECT * FROM question
-    #                 ORDER BY message
-    #                    """)
-    # else:
-    #     cursor.execute("""
-    #                 SELECT * FROM question
-    #                 ORDER BY submission_time DESC
-    #                    """)
-
+                        """)
     questions = cursor.fetchall()
     return questions
 
