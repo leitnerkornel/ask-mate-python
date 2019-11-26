@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <h3>The question is:</h3>
+
+    <table class="main_table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Message</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td> {{ question.title }} </td>
+            <td> {{ question.message }} </td>
+        </tr>
+        </tbody>
+    </table></br>
+
+    <h3>Comment</h3></br>
+    <div class="comment">
+        <form action="/question/{{ question.id }}/new-comment" method="POST">
+            <textarea id="comment-input" name="comment" rows="8" cols="80" required
+                      placeholder="Write your comment here"></textarea><br/>
+            <button type="submit" id="comment_button">Save comment</button>
+            <a href="/question/{{ question.id }}">
+                <button type="button" id="go_back_to_question">Go back to question</button>
+            </a>
+        </form>
+    </div>
+
+
+
+{% endblock %}
