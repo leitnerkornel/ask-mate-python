@@ -1,4 +1,5 @@
 import connection
+from psycopg2 import sql
 from datetime import datetime
 
 
@@ -105,6 +106,20 @@ def delete_answer(cursor, question_id):
                         WHERE question_id = %(question_id)s;
                     """,
                    {'question_id': question_id})
+
+@connection.connection_handler
+def search_in_table(cursor, search_phrase):
+    cursor.execute("""
+                       SELECT id FROM question
+                       WHERE message LIKE %(search_phrase)s;
+                       """,
+                   {'search_phrase': search_phrase})
+    question_id = cursor.fetchone()
+    return question_id
+
+
+
+
 
 
 def convert_linebreaks_to_br(original_str):
