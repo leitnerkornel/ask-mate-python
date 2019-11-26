@@ -12,6 +12,14 @@
     <h4>"1N73LL1G3NC3 15 7H3 4B1L17Y 70 4D4P7 70 CH4NG3"</h4>
     <h5>573PH3N H4WK1NG</h5>
 
+
+    <form action="/search">
+    Search Google: <input type="search" name="q"><br>
+        <a href="/search?q={{ search_phrase }}">
+    <input type="submit">
+    </a></form>
+
+
     {% block content %} {% endblock %}
 
 </body>
