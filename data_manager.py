@@ -97,7 +97,7 @@ def get_time():
 def delete_answer(cursor, answer_id, question_id):
     cursor.execute("""
                         DELETE FROM answer
-                        WHERE answer_id = %(answer_id)s AND
+                        WHERE id = %(answer_id)s AND
                         question_id = %(question_id)s;
                     """,
                    {'answer_id': answer_id, 'question_id': question_id})
@@ -108,19 +108,19 @@ def convert_linebreaks_to_br(original_str):
 
 
 @connection.connection_handler
-def new_comment(cursor, comment, question_id, submission_time):
+def new_comment(cursor, com, question_id, submission_time):
     cursor.execute("""
-                    INSERT INTO comments
-                    (comment, question_id, submission_time)
-                    VALUES (%(comment)s, %(question_id)s, %(submission_time)s)
+                    INSERT INTO comment
+                    (message, question_id, submission_time)
+                    VALUES (%(com)s, %(question_id)s, %(submission_time)s)
     """,
-                   {'comment': comment, 'question_id': question_id, 'submission_time': submission_time})
+                   {'com': com, 'question_id': question_id, 'submission_time': submission_time})
 
 
 @connection.connection_handler
 def get_comments_by_q_id(cursor, question_id):
     cursor.execute("""
-                        SELECT submission_time, comment FROM comments
+                        SELECT submission_time, message FROM comment
                         WHERE question_id = %(question_id)s;
                        """,
                    {'question_id': question_id})
