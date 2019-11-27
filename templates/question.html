@@ -85,6 +85,11 @@
                     <button type="button" id="comment">Comment</button>
                 </a>
             </td>
+            <td>
+                <a href="{{ url_for('route_update_question', question_id=question['id']) }}">
+                    <button type="button" id="update">Update</button>
+                </a>
+            </td>
             <td><a href="/list">
                 <button type="button" id="go_back">Go back</button>
             </a></td>
