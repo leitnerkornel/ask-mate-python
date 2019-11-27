@@ -9,12 +9,15 @@
         <tr>
             <th>Title</th>
             <th>Message</th>
+            <th>Asked by</th>
+
         </tr>
         </thead>
         <tbody>
         <tr>
             <td>{{ question.title | safe }}</td>
             <td>{{ question.message | safe }}</td>
+            <td>{{ question.username }}</td>
         </tr>
         </tbody>
     </table>
