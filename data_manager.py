@@ -49,14 +49,14 @@ def get_numbered_question(cursor, numb_limit):
 
 
 @connection.connection_handler
-def add_question(cursor, question_title, question_message, submission_time):
-    cursor.execute("""
-                        INSERT INTO question 
-                        (title, message, submission_time)
-                        VALUES (%(question_title)s, %(question_message)s, %(submission_time)s) ;
+def add_question(cursor, question_title, question_message, submission_time, name):
+    cursor.execute("""  
+                        ALTER TABLE question ADD COLUMN IF NOT EXISTS username text;
+                        INSERT INTO question (title, message, submission_time, username)
+                        VALUES (%(question_title)s, %(question_message)s, %(submission_time)s, %(name)s);
                        """,
                    {'question_title': question_title, 'question_message': question_message,
-                    'submission_time': submission_time})
+                    'submission_time': submission_time, 'name': name})
 
 
 @connection.connection_handler
@@ -122,10 +122,6 @@ def search_in_answers(cursor, search_phrase):
                    {'search_phrase': "%" + search_phrase + "%"})
     answers = cursor.fetchall()
     return answers
-
-
-
-
 
 
 def convert_linebreaks_to_br(original_str):

@@ -3,6 +3,7 @@ import data_manager
 
 app = Flask(__name__)
 
+logged_user = "kornel"
 
 @app.route('/')
 def last_numbered_question():
@@ -28,7 +29,7 @@ def route_add_question():
         question_title = request.form['title']
         question_message = request.form['note']
         submission_time = data_manager.get_time()
-        data_manager.add_question(question_title, question_message, submission_time)
+        data_manager.add_question(question_title, question_message, submission_time, logged_user)
         return redirect('/')
     return render_template('message.html')
 
