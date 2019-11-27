@@ -15,7 +15,12 @@
     <button type="button" id="user_registration">Registration</button>
 </a>
 
-{% block content %} {% endblock %}
+    <form action="/search" style="margin:auto;max-width:300px">
+        <input type="text" placeholder="Search.." name="q">
+        <button type="submit" id="green_button"><i>Search</i></button>
+    </form>
+
+    {% block content %} {% endblock %}
 
 </body>
 </html>
