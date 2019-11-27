@@ -100,7 +100,31 @@ h5 {
     margin: 0px auto;
 }
 
-.buttons_question #delete_button {
+#green_button {
+    box-shadow: inset 0px 0px 0px 0px #3dc21b;
+    background: #44c767 linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+    border: 1px solid #18ab29;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 16px 29px;
+    text-decoration: none;
+    text-shadow: 0px 0px 0px #2f6627;
+}
+
+#green_button:hover {
+    background: #5cbf2a linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
+}
+
+#green_button:active {
+    position: relative;
+    top: 1px;
+}
+
+#red_button {
     box-shadow: inset 0px 0px 0px 0px #cf866c;
     background: #d0451b linear-gradient(to bottom, #d0451b 5%, #e34829 100%);
     display: inline-block;
@@ -114,57 +138,11 @@ h5 {
     text-shadow: 0px 0px 0px #854629;
 }
 
-.buttons_question #delete_button:hover {
+#red_button:hover {
     background: #e34829 linear-gradient(to bottom, #e34829 5%, #d0451b 100%);
 }
 
-.buttons_question #delete_button:active {
-    position: relative;
-    top: 1px;
-}
-
-.buttons_question #post_answer_button {
-    box-shadow: inset 0px 0px 0px 0px #3dc21b;
-    background: #44c767 linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: Arial;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 16px 29px;
-    text-decoration: none;
-    text-shadow: 0px 0px 0px #854629;
-}
-
-.buttons_question #post_answer_button:hover {
-    background: #5cbf2a linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
-}
-
-.buttons_question #post_answer_button:active {
-    position: relative;
-    top: 1px;
-}
-
-.buttons_question #go_back {
-    box-shadow: inset 0px 0px 0px 0px #cf866c;
-    background: #d0451b linear-gradient(to bottom, #d0451b 5%, #e34829 100%);
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: Arial;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 16px 29px;
-    text-decoration: none;
-    text-shadow: 0px 0px 0px #854629;
-}
-
-.buttons_question #go_back:hover {
-    background: #e34829 linear-gradient(to bottom, #e34829 5%, #d0451b 100%);
-}
-
-.buttons_question #go_back:active {
+#red_button:active {
     position: relative;
     top: 1px;
 }
@@ -175,156 +153,18 @@ h5 {
     margin-left: 37%;
 }
 
-.buttons #go_back_main {
-    box-shadow: inset 0px 0px 0px 0px #cf866c;
-    background: #d0451b linear-gradient(to bottom, #d0451b 5%, #e34829 100%);
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: Arial;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 16px 29px;
-    text-decoration: none;
-    text-shadow: 0px 0px 0px #854629;
-}
-
-.buttons #go_back_main:hover {
-    background: #e34829 linear-gradient(to bottom, #e34829 5%, #d0451b 100%);
-}
-
-.buttons #go_back_main:active {
-    position: relative;
-    top: 1px;
-}
-
-.buttons #ask_question {
-    box-shadow: inset 0px 0px 0px 0px #3dc21b;
-    background: #44c767 linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
-    text-shadow: 0px 0px 0px #2f6627;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: Arial;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 16px 29px;
-    text-decoration: none;
-    text-shadow: 0px 0px 0px #854629;
-}
-
-.buttons #ask_question:hover {
-    background: #5cbf2a linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
-}
-
-.buttons #ask_question:active {
-    position: relative;
-    top: 1px;
-}
 
 .add_question {
     text-align: center;
 }
 
-.add_question #go_back_main {
-    box-shadow: inset 0px 0px 0px 0px #3dc21b;
-    background: #44c767 linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
-    border: 1px solid #18ab29;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: Arial;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 16px 29px;
-    text-decoration: none;
-    text-shadow: 0px 0px 0px #2f6627;
-}
 
-.add_question #go_back_main:hover {
-    background: #5cbf2a linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
-}
 
-.add_question #go_back_main:active {
-    position: relative;
-    top: 1px;
-}
-
-.add_question #post_answer_button {
-    box-shadow: inset 0px 0px 0px 0px #3dc21b;
-    background: #44c767 linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
-    border: 1px solid #18ab29;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: Arial;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 16px 29px;
-    text-decoration: none;
-    text-shadow: 0px 0px 0px #2f6627;
-}
-
-.add_question #post_answer_button:hover {
-    background: #5cbf2a linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
-}
-
-.add_question #post_answer_button:active {
-    position: relative;
-    top: 1px;
-}
 
 .answer {
     text-align: center;
 }
 
-.answer #post_answer_button {
-    box-shadow: inset 0px 0px 0px 0px #3dc21b;
-    background: #44c767 linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
-    border: 1px solid #18ab29;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: Arial;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 16px 29px;
-    text-decoration: none;
-    text-shadow: 0px 0px 0px #2f6627;
-}
-
-.answer #post_answer_button:hover {
-    background: #5cbf2a linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
-}
-
-.answer #post_answer_button:active {
-    position: relative;
-    top: 1px;
-}
-
-.answer #go_back_to_question {
-    box-shadow: inset 0px 0px 0px 0px #3dc21b;
-    background: #44c767 linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
-    border: 1px solid #18ab29;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: Arial;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 16px 29px;
-    text-decoration: none;
-    text-shadow: 0px 0px 0px #2f6627;
-}
-
-.answer #go_back_to_question:hover {
-    background: #5cbf2a linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
-}
-
-.answer #go_back_to_question:active {
-    position: relative;
-    top: 1px;
-}
 
 .order {
     position: center;
