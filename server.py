@@ -53,7 +53,7 @@ def route_update_answer(answer_id):
         submission_time = data_manager.get_time()
         data_manager.update_answer(answer_id, submission_time, answer_message)
         return redirect('/list')
-    return render_template('update-answer.html', answer=answer)
+    return render_template('update-answer.html', answer=answer, answer_id=answer_id)
 
 
 @app.route('/question/<question_id>', methods=['GET'])

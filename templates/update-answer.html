@@ -4,7 +4,7 @@
 
     <h3>Edit answer</h3>
     <div class="edit-answer"></div>
-    <form action="/answer/{{ answer.id }}/update-answer" method="post">
+    <form action="/answer/{{ answer_id }}/update-answer" method="post">
         <label for="answer_message">Message:</label> <br/>
         <textarea id="answer_message" name="message" rows="8" cols="80">{{ answer.message }}</textarea><br/>
         <button type="submit" id="update">Save message</button>
