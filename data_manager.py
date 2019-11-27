@@ -1,4 +1,5 @@
 import connection
+from psycopg2 import sql
 from datetime import datetime
 import bcrypt
 
@@ -122,6 +123,30 @@ def delete_answer(cursor, answer_id, question_id):
                         question_id = %(question_id)s;
                     """,
                    {'answer_id': answer_id, 'question_id': question_id})
+
+@connection.connection_handler
+def search_in_questions(cursor, search_phrase):
+    cursor.execute("""
+                       SELECT * FROM question
+                       WHERE lower(message) LIKE lower(%(search_phrase)s) OR lower(title) LIKE lower(%(search_phrase)s);
+                       """,
+                   {'search_phrase': "%" + search_phrase + "%"})
+    questions = cursor.fetchall()
+    return questions
+
+@connection.connection_handler
+def search_in_answers(cursor, search_phrase):
+    cursor.execute("""
+                       SELECT a.message, q.id, q.title FROM answer AS a JOIN question AS q ON a.question_id = q.id
+                       WHERE lower(a.message) LIKE lower(%(search_phrase)s);
+                       """,
+                   {'search_phrase': "%" + search_phrase + "%"})
+    answers = cursor.fetchall()
+    return answers
+
+
+
+
 
 
 def convert_linebreaks_to_br(original_str):

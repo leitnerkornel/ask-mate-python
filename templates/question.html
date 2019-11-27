@@ -60,7 +60,7 @@
                     <td>{{ answer.message | safe }}</td>
                     <td>
                         <a href="{{ url_for('delete_answer_alone', answer_id=answer['id'], question_id=question['id']) }}">
-                            <button type="button" id="delete_button">Delete answer</button>
+                            <button type="button" id="red_button">Delete answer</button>
                         </a>
                     </td>
                     <td>
@@ -80,10 +80,10 @@
         <tr>
             <td>
                 <a href="{{ url_for('delete_question', question_id=question['id']) }}">
-                    <button type="button" id="delete_button">Delete question</button>
+                    <button type="button" id="red_button">Delete question</button>
                 </a></td>
             <td><a href="{{ url_for('route_post_answer', question_id=question['id']) }}">
-                <button type="button" id="post_answer_button">Post an answer</button>
+                <button type="button" id="green_button">Post an answer</button>
             </a></td>
             <td>
                 <a href="{{ url_for('route_comment_to_question', question_id=question['id']) }}">
@@ -96,7 +96,7 @@
                 </a>
             </td>
             <td><a href="/list">
-                <button type="button" id="go_back">Go back</button>
+                <button type="button" id="red_button">Go back</button>
             </a></td>
         </tr>
     </table>
