@@ -77,7 +77,6 @@ def route_post_answer(question_id):
     return render_template('answer.html', question=question)
 
 
-
 @app.route('/search')
 def list_search_result():
     search_phrase = request.args.get('q')
