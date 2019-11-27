@@ -1,5 +1,6 @@
 import connection
 from datetime import datetime
+import bcrypt
 
 
 @connection.connection_handler
@@ -113,3 +114,23 @@ def get_comments_by_q_id(cursor, question_id):
                    {'question_id': question_id})
     comments = cursor.fetchall()
     return comments
+
+
+@connection.connection_handler
+def register_user(cursor, username, password, reg_date):
+    cursor.execute("""
+                        INSERT INTO users(username, password, reg_date)
+                        VALUES (%(username)s, %(password)s, %(reg_date)s)
+                    """,
+                   {'username': username, 'password': password, 'reg_date': reg_date})
+
+
+def hash_password(plain_text_password):
+    hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
+    return hashed_bytes.decode('utf-8')
+
+
+def verify_password(plain_text_password, hashed_password):
+    hashed_bytes_password = hashed_password.encode('utf-8')
+    return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)
+

@@ -77,6 +77,17 @@ def route_comment(question_id):
     return render_template('comment.html', question=question)
 
 
+@app.route('/registration', methods=['GET', 'POST'])
+def user_registration():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = data_manager.hash_password(request.form['pwd1'])
+        reg_date = data_manager.get_time()
+        data_manager.register_user(username, password, reg_date)
+
+    return render_template('registration.html')
+
+
 if __name__ == '__main__':
     app.run(
         host='0.0.0.0',
