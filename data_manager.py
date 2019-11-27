@@ -15,6 +15,17 @@ def get_answers_by_question_id(cursor, question_id):
 
 
 @connection.connection_handler
+def get_answer_by_id(cursor, answer_id):
+    cursor.execute("""
+                    SELECT message FROM answer
+                    WHERE id = %(answer_id)s;
+                    """,
+                   {'answer_id': answer_id})
+    answer = cursor.fetchone()
+    return answer
+
+
+@connection.connection_handler
 def get_question_by_id(cursor, question_id):
     cursor.execute("""
                     SELECT * FROM question
@@ -71,14 +82,13 @@ def update_question(cursor, question_id, question_title, question_message, submi
 
 
 @connection.connection_handler
-def update_answer(cursor, question_id, answer_message, submission_time):
+def update_answer(cursor, answer_id, submission_time, answer_message):
     cursor.execute("""
                 UPDATE answer
-                SET message = %(answer_message)s, submission_time = %(submission_time)s
-                WHERE answer_id = %(answer_id)s AND question_id = %(question_id)s
+                SET  submission_time = %(submission_time)s, message = %(answer_message)s
+                WHERE id = %(answer_id)s
     """,
-                   {'answer_message': answer_message, 'submission_time': submission_time, 'answer_id': answer_id,
-                    'question_id': question_id})
+                   {'answer_message': answer_message, 'submission_time': submission_time, 'answer_id': answer_id})
 
 
 @connection.connection_handler

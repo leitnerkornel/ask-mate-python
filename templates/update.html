@@ -2,13 +2,10 @@
 
 {% block content %}
 
-    {% if  %}
-
-
     <h3>Edit question</h3>
 
     <div class="edit-question">
-        <form action="/question/{{ question.id }}/update" method="post">
+        <form action="/question/{{ question.id }}/update-question" method="post">
             <label for="question_title">Title:</label><br/>
             <textarea id="question_title" name="title" rows="1" cols="40"> {{ question.title }}</textarea><br/>
             <label for="question_message">Message:</label> <br/>

@@ -33,7 +33,7 @@ def route_add_question():
     return render_template('message.html')
 
 
-@app.route('/question/<question_id>/update', methods=['POST', 'GET'])
+@app.route('/question/<question_id>/update-question', methods=['POST', 'GET'])
 def route_update_question(question_id):
     question = data_manager.get_question_by_id(question_id)
     if request.method == "POST":
@@ -45,15 +45,15 @@ def route_update_question(question_id):
     return render_template('update.html', question=question)
 
 
-@app.route('/question/<question_id>/<answer_id>/update', methods=['POST', 'GET'])
-def route_update_answer(question_id, answer_id):
-    question = data_manager.get_answers_by_question_id(question_id)
+@app.route('/answer/<answer_id>/update-answer', methods=['POST', 'GET'])
+def route_update_answer(answer_id):
+    answer = data_manager.get_answer_by_id(answer_id)
     if request.method == "POST":
         answer_message = request.form['message']
         submission_time = data_manager.get_time()
-        data_manager.update_answer(question_id, answer_message, submission_time)
-        return redirect(f'/question/{question_id}')
-    return render_template('update.html', question=question)
+        data_manager.update_answer(answer_id, submission_time, answer_message)
+        return redirect('/list')
+    return render_template('update-answer.html', answer=answer)
 
 
 @app.route('/question/<question_id>', methods=['GET'])
