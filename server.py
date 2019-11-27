@@ -89,12 +89,12 @@ def route_post_answer(question_id):
 
 
 @app.route('/question/<question_id>/new-comment', methods=['GET', 'POST'])
-def route_comment(question_id):
+def route_comment_to_question(question_id):
     question = data_manager.get_question_by_id(question_id)
     if request.method == 'POST':
         saved_comment = request.form['com']
         submission_time = data_manager.get_time()
-        data_manager.new_comment(saved_comment, question_id, submission_time)
+        data_manager.add_comment_to_question(saved_comment, question_id, submission_time)
         return redirect(f"/question/{question_id}")
     return render_template('comment.html', question=question)
 

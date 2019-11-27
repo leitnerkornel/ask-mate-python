@@ -129,7 +129,7 @@ def convert_linebreaks_to_br(original_str):
 
 
 @connection.connection_handler
-def new_comment(cursor, com, question_id, submission_time):
+def add_comment_to_question(cursor, com, question_id, submission_time):
     cursor.execute("""
                     INSERT INTO comment
                     (message, question_id, submission_time)
