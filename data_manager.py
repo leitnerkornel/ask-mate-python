@@ -29,25 +29,7 @@ def get_questions(cursor, order_by):
     cursor.execute(f"""
                         SELECT * FROM question
                         ORDER BY {order_by};
-                        """,)
-
-
-    # if order_by == 'title':
-    #     cursor.execute("""
-    #                 SELECT * FROM question
-    #                 ORDER BY title;
-    #                    """)
-    # elif order_by == 'message':
-    #     cursor.execute("""
-    #                 SELECT * FROM question
-    #                 ORDER BY message
-    #                    """)
-    # else:
-    #     cursor.execute("""
-    #                 SELECT * FROM question
-    #                 ORDER BY submission_time DESC
-    #                    """)
-
+                        """)
     questions = cursor.fetchall()
     return questions
 
@@ -99,13 +81,35 @@ def get_time():
 
 
 @connection.connection_handler
-def delete_answer(cursor, question_id):
+def delete_answer(cursor, answer_id, question_id):
     cursor.execute("""
                         DELETE FROM answer
-                        WHERE question_id = %(question_id)s;
+                        WHERE answer_id = %(answer_id)s AND
+                        question_id = %(question_id)s;
                     """,
-                   {'question_id': question_id})
+                   {'answer_id': answer_id, 'question_id': question_id})
 
 
 def convert_linebreaks_to_br(original_str):
     return '<br/>'.join(original_str.split('\n'))
+
+
+@connection.connection_handler
+def new_comment(cursor, comment, question_id, submission_time):
+    cursor.execute("""
+                    INSERT INTO comments
+                    (comment, question_id, submission_time)
+                    VALUES (%(comment)s, %(question_id)s, %(submission_time)s)
+    """,
+                   {'comment': comment, 'question_id': question_id, 'submission_time': submission_time})
+
+
+@connection.connection_handler
+def get_comments_by_q_id(cursor, question_id):
+    cursor.execute("""
+                        SELECT submission_time, comment FROM comments
+                        WHERE question_id = %(question_id)s;
+                       """,
+                   {'question_id': question_id})
+    comments = cursor.fetchall()
+    return comments

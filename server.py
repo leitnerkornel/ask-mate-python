@@ -23,7 +23,7 @@ def all_question():
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
-def route_add():
+def route_add_question():
     if request.method == "POST":
         question_title = request.form['title']
         question_message = request.form['note']
@@ -37,7 +37,9 @@ def route_add():
 def route_question(question_id):
     question = data_manager.get_question_by_id(question_id)
     answers = data_manager.get_answers_by_question_id(question_id)
-    return render_template('question.html', question=question, answers=answers)
+    comments = data_manager.get_comments_by_q_id(question_id)
+    print(comments)
+    return render_template('question.html', question=question, answers=answers, comments=comments)
 
 
 @app.route('/question/<question_id>/delete')
@@ -47,8 +49,14 @@ def delete_question(question_id):
     return redirect('/')
 
 
+@app.route('/question/<question_id>/delete-answer')
+def delete_answer_alone(answer_id, question_id):
+    data_manager.delete_answer(answer_id, question_id)
+    return redirect(f"/question/{question_id}")
+
+
 @app.route('/question/<question_id>/new-answer', methods=['GET', 'POST'])
-def route_post(question_id):
+def route_post_answer(question_id):
     question = data_manager.get_question_by_id(question_id)
     if request.method == 'POST':
         saved_answer = request.form['answer']
@@ -56,6 +64,17 @@ def route_post(question_id):
         data_manager.save_answers_to_question(saved_answer, question_id, submission_time)
         return redirect(f"/question/{question_id}")
     return render_template('answer.html', question=question)
+
+
+@app.route('/question/<question_id>/new-comment', methods=['GET', 'POST'])
+def route_comment(question_id):
+    question = data_manager.get_question_by_id(question_id)
+    if request.method == 'POST':
+        saved_comment = request.form['comment']
+        submission_time = data_manager.get_time()
+        data_manager.new_comment(saved_comment, question_id, submission_time)
+        return redirect(f"/question/{question_id}")
+    return render_template('comment.html', question=question)
 
 
 if __name__ == '__main__':
