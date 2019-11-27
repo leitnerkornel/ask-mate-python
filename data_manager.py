@@ -1,6 +1,7 @@
 import connection
 from psycopg2 import sql
 from datetime import datetime
+import bcrypt
 
 
 @connection.connection_handler
@@ -30,25 +31,7 @@ def get_questions(cursor, order_by):
     cursor.execute(f"""
                         SELECT * FROM question
                         ORDER BY {order_by};
-                        """,)
-
-
-    # if order_by == 'title':
-    #     cursor.execute("""
-    #                 SELECT * FROM question
-    #                 ORDER BY title;
-    #                    """)
-    # elif order_by == 'message':
-    #     cursor.execute("""
-    #                 SELECT * FROM question
-    #                 ORDER BY message
-    #                    """)
-    # else:
-    #     cursor.execute("""
-    #                 SELECT * FROM question
-    #                 ORDER BY submission_time DESC
-    #                    """)
-
+                        """)
     questions = cursor.fetchall()
     return questions
 
@@ -77,6 +60,18 @@ def add_question(cursor, question_title, question_message, submission_time):
 
 
 @connection.connection_handler
+def update_question(cursor, question_id, question_title, question_message, submission_time):
+    cursor.execute("""
+                    UPDATE question
+                    SET title = %(question_title)s, message = %(question_message)s,
+                    submission_time = %(submission_time)s
+                    WHERE id = %(question_id)s;
+    """,
+                   {'question_title': question_title, 'question_message': question_message, 'question_id': question_id,
+                    'submission_time': submission_time})
+
+
+@connection.connection_handler
 def save_answers_to_question(cursor, answer_text, question_id, submission_time):
     cursor.execute("""
                         INSERT INTO answer(message, question_id, submission_time)
@@ -100,12 +95,13 @@ def get_time():
 
 
 @connection.connection_handler
-def delete_answer(cursor, question_id):
+def delete_answer(cursor, answer_id, question_id):
     cursor.execute("""
                         DELETE FROM answer
-                        WHERE question_id = %(question_id)s;
+                        WHERE answer_id = %(answer_id)s AND
+                        question_id = %(question_id)s;
                     """,
-                   {'question_id': question_id})
+                   {'answer_id': answer_id, 'question_id': question_id})
 
 @connection.connection_handler
 def search_in_questions(cursor, search_phrase):
@@ -134,3 +130,44 @@ def search_in_answers(cursor, search_phrase):
 
 def convert_linebreaks_to_br(original_str):
     return '<br/>'.join(original_str.split('\n'))
+
+
+@connection.connection_handler
+def new_comment(cursor, comment, question_id, submission_time):
+    cursor.execute("""
+                    INSERT INTO comments
+                    (comment, question_id, submission_time)
+                    VALUES (%(comment)s, %(question_id)s, %(submission_time)s)
+    """,
+                   {'comment': comment, 'question_id': question_id, 'submission_time': submission_time})
+
+
+@connection.connection_handler
+def get_comments_by_q_id(cursor, question_id):
+    cursor.execute("""
+                        SELECT submission_time, comment FROM comments
+                        WHERE question_id = %(question_id)s;
+                       """,
+                   {'question_id': question_id})
+    comments = cursor.fetchall()
+    return comments
+
+
+@connection.connection_handler
+def register_user(cursor, username, password, reg_date):
+    cursor.execute("""
+                        INSERT INTO users(username, password, reg_date)
+                        VALUES (%(username)s, %(password)s, %(reg_date)s)
+                    """,
+                   {'username': username, 'password': password, 'reg_date': reg_date})
+
+
+def hash_password(plain_text_password):
+    hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
+    return hashed_bytes.decode('utf-8')
+
+
+def verify_password(plain_text_password, hashed_password):
+    hashed_bytes_password = hashed_password.encode('utf-8')
+    return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)
+

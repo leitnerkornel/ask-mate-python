@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <h3>User registration</h3>
+    <script type="text/javascript">
+
+        function checkPassword(str) {
+            if (str.length < 6) {
+                alert(unescape("Password has to be at least 6 characters long!"));
+                document.contact.message.focus();
+                return false;
+            }
+        }
+
+        function checkForm(form) {
+            if (form.username.value === "") {
+                alert("Username cannot be blank!");
+                form.username.focus();
+                return false;
+            }
+            re = /^\w+$/;
+            if (!re.test(form.username.value)) {
+                alert("Username must contain only letters, numbers and underscores!");
+                form.username.focus();
+                return false;
+            }
+            if (form.pwd1.value !== form.pwd2.value)
+                alert("The password and confirm password isn't match!");
+            form.pwd1.focus();
+            return false;
+        }
+
+        if (form.pwd1.value === "") {
+            alert("Password cannot be blank!");
+            form.username.focus();
+            return false;
+        }
+
+
+        return true;
+        }
+
+    </script>
+
+    <form method="POST" action="" onsubmit="return checkForm(this);">
+        <label for="username-input">Username:</label>
+        <input type="text" id="username_input" name="username" placeholder="username"><br>
+        <label for="pwd1-input">Password:</label>
+        <input type="password" id="pwd1_input" name="pwd1" placeholder="password"><br>
+        <label for="pwd2-input">Confirm password:</label>
+        <input type="password" id="pwd2_input" name="pwd2" placeholder="confirm password"><br>
+        <button type="submit">Registration</button>
+    </form>
+    <a href="/">
+        <button type="button" id="go_back">Go back to main page</button>
+    </a>
+{% endblock %}
