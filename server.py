@@ -73,7 +73,7 @@ def route_post_answer(question_id):
     if request.method == 'POST':
         saved_answer = request.form['answer']
         submission_time = data_manager.get_time()
-        data_manager.save_answers_to_question(saved_answer, question_id, submission_time)
+        data_manager.save_answers_to_question(saved_answer, question_id, submission_time, logged_user)
         return redirect(f"/question/{question_id}")
     return render_template('answer.html', question=question)
 

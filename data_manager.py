@@ -72,12 +72,14 @@ def update_question(cursor, question_id, question_title, question_message, submi
 
 
 @connection.connection_handler
-def save_answers_to_question(cursor, answer_text, question_id, submission_time):
+def save_answers_to_question(cursor, answer_text, question_id, submission_time, name):
     cursor.execute("""
-                        INSERT INTO answer(message, question_id, submission_time)
-                        VALUES (%(answer_text)s, %(question_id)s, %(submission_time)s)
+                        ALTER TABLE answer ADD COLUMN IF NOT EXISTS username text;
+                        INSERT INTO answer(message, question_id, submission_time, username)
+                        VALUES (%(answer_text)s, %(question_id)s, %(submission_time)s, %(name)s);
                     """,
-                   {'answer_text': answer_text, 'question_id': question_id, 'submission_time': submission_time})
+                   {'answer_text': answer_text, 'question_id': question_id, 'submission_time': submission_time,
+                    'name': name})
 
 
 @connection.connection_handler
