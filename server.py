@@ -63,15 +63,9 @@ def route_post(question_id):
 def user_registration():
     if request.method == 'POST':
         username = request.form['username']
-        password = data_manager.hash_password(request.form['password1'])
-        password_confirm = data_manager.hash_password(request.form['password2'])
-
-        if password != password_confirm:
-            return redirect('/registration')
-
-        data_manager.register_user(username, password)
-
-
+        password = data_manager.hash_password(request.form['pwd1'])
+        reg_date = data_manager.get_time()
+        data_manager.register_user(username, password, reg_date)
 
     return render_template('registration.html')
 

@@ -7,60 +7,50 @@
 
   function checkPassword(str)
   {
-    var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-    return re.test(str);
+    if (str.length < 6) {
+    alert(unescape("Password has to be at least 6 characters long!"));
+    document.contact.message.focus();
+    return false;
+}
   }
 
   function checkForm(form)
   {
-    if(form.username.value == "") {
-      alert("Error: Username cannot be blank!");
+    if(form.username.value === "") {
+      alert("Username cannot be blank!");
       form.username.focus();
       return false;
     }
     re = /^\w+$/;
     if(!re.test(form.username.value)) {
-      alert("Error: Username must contain only letters, numbers and underscores!");
+      alert("Username must contain only letters, numbers and underscores!");
       form.username.focus();
       return false;
     }
-    if(form.pwd1.value != "" && form.pwd1.value == form.pwd2.value) {
-      if(!checkPassword(form.pwd1.value)) {
-        alert("The password you have entered is not valid!");
+    if(form.pwd1.value !== form.pwd2.value)
+        alert("The password and confirm password isn't match!");
         form.pwd1.focus();
         return false;
-      }
-    } else {
-      alert("Error: Please check that you've entered and confirmed your password!");
-      form.pwd1.focus();
+    }
+    if(form.pwd1.value === "") {
+      alert("Password cannot be blank!");
+      form.username.focus();
       return false;
     }
+
+
     return true;
   }
 
 </script>
 
-<form method="POST" action="..." onsubmit="return checkForm(this);">
-<p>Username: <input type="text" name="username"></p>
-<p>Password: <input type="password" name="pwd1"></p>
-<p>Confirm Password: <input type="password" name="pwd2"></p>
-<p><input type="submit"></p>
-{#</form>
-    <div class="add_question">
-        <form action="/registration" method="post">
-            <label for="username-input">Username:</label><br/>
-            <input type="text" id="username-input" name="username" required
-                      placeholder="Write your username here"><br/>
-            <label for="password-input">Password:</label> <br/>
-            <input type="password" id="password-input" name="password1" minlength="6" required
-                      placeholder="Password"><br/>
-            <label for="confirm-password">Password confirmation:</label> <br/>
-            <input type="password" id="confirm-password" name="password2" required
-                      placeholder="Confirm password"><br/>
-            <button type="submit" id="post_answer_button">Registration</button>
-            <a href="{{ url_for('all_question') }}">
-                <button type="button" id="go_back_main">See all question</button>
-            </a>
-        </form>#}
-    </div>
+<form method="POST" action="" onsubmit="return checkForm(this);">
+<label for="username-input">Username:</label>
+<input type="text" id="username_input" name="username" placeholder="username"><br>
+<label for="pwd1-input">Password:</label>
+<input type="password" id="pwd1_input" name="pwd1" placeholder="password"><br>
+<label for="pwd2-input">Confirm password:</label>
+<input type="password" id="pwd2_input" name="pwd2" placeholder="confirm password"><br>
+    <button type="submit">Registration</button>
+</form>
 {% endblock %}

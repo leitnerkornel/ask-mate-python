@@ -96,16 +96,15 @@ def convert_linebreaks_to_br(original_str):
 
 
 @connection.connection_handler
-def register_user(cursor, username, password, submission_time):
+def register_user(cursor, username, password, reg_date):
     cursor.execute("""
-                        INSERT INTO users(username, password, submission_time)
-                        VALUES (%(username)s, %(password)s, %(submission_time)s)
+                        INSERT INTO users(username, password, reg_date)
+                        VALUES (%(username)s, %(password)s, %(reg_date)s)
                     """,
-                   {'username': username, 'password': password, 'submission_time': submission_time})
+                   {'username': username, 'password': password, 'reg_date': reg_date})
 
 
 def hash_password(plain_text_password):
-    # By using bcrypt, the salt is saved into the hash itself
     hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
     return hashed_bytes.decode('utf-8')
 
