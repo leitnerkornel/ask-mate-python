@@ -1,5 +1,6 @@
 import connection
 from datetime import datetime
+import bcrypt
 
 
 @connection.connection_handler
@@ -26,22 +27,11 @@ def get_question_by_id(cursor, question_id):
 
 @connection.connection_handler
 def get_questions(cursor, order_by):
-    if order_by == 'title':
-        cursor.execute("""
-                    SELECT * FROM question
-                    ORDER BY title;
-                       """)
-    elif order_by == 'message':
-        cursor.execute("""
-                    SELECT * FROM question
-                    ORDER BY message
-                       """)
-    else:
-        cursor.execute("""
-                    SELECT * FROM question
-                    ORDER BY submission_time DESC 
-                       """)
-
+    cursor.execute("""
+                SELECT * FROM question
+                ORDER BY %(order_by)s;
+                   """,
+                {'order_by': order_by})
     questions = cursor.fetchall()
     return questions
 
@@ -103,3 +93,24 @@ def delete_answer(cursor, question_id):
 
 def convert_linebreaks_to_br(original_str):
     return '<br/>'.join(original_str.split('\n'))
+
+
+@connection.connection_handler
+def register_user(cursor, username, password, submission_time):
+    cursor.execute("""
+                        INSERT INTO users(username, password, submission_time)
+                        VALUES (%(username)s, %(password)s, %(submission_time)s)
+                    """,
+                   {'username': username, 'password': password, 'submission_time': submission_time})
+
+
+def hash_password(plain_text_password):
+    # By using bcrypt, the salt is saved into the hash itself
+    hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
+    return hashed_bytes.decode('utf-8')
+
+
+def verify_password(plain_text_password, hashed_password):
+    hashed_bytes_password = hashed_password.encode('utf-8')
+    return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)
+

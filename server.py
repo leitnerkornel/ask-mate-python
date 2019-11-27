@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import data_manager
 
+
 app = Flask(__name__)
 
 
@@ -13,7 +14,7 @@ def last_numbered_question():
 @app.route('/list')
 def all_question():
     allowed_order_options = ['title', 'submission_time', 'message']
-    order_by = request.args.get('order')
+    order_by = request.args.get("order")
 
     if order_by not in allowed_order_options:
         order_by = 'submission_time'
@@ -56,6 +57,23 @@ def route_post(question_id):
         data_manager.save_answers_to_question(saved_answer, question_id, submission_time)
         return redirect(f"/question/{question_id}")
     return render_template('answer.html', question=question)
+
+
+@app.route('/registration', methods=['GET', 'POST'])
+def user_registration():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = data_manager.hash_password(request.form['password1'])
+        password_confirm = data_manager.hash_password(request.form['password2'])
+
+        if password != password_confirm:
+            return redirect('/registration')
+
+        data_manager.register_user(username, password)
+
+
+
+    return render_template('registration.html')
 
 
 if __name__ == '__main__':
