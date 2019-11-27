@@ -18,7 +18,29 @@
         </tr>
         </tbody>
     </table>
-
+    <h2>Comments</h2>
+    <table>
+        <thead>
+        <tr>
+            {% if comments %}
+                <th>Posted</th>
+                <th>Comment</th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% if comments %}
+            {% for comment in comments %}
+                <tr>
+                    <td>{{ comment.submission_time | safe }}</td>
+                    <td>{{ comment.comment | safe }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <h3>No comments yet.</h3>
+        {% endif %}
+        </tbody>
+    </table>
     <h2>Answers</h2>
 
     <table class="answer_table">
@@ -36,6 +58,11 @@
                 <tr>
                     <td>{{ answer.submission_time | safe }}</td>
                     <td>{{ answer.message | safe }}</td>
+                    <td>
+                        <a href="{{ url_for('delete_answer_alone', answer_id=answer['id'], question_id=question['id']) }}">
+                            <button type="button" id="delete_button">Delete answer</button>
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
         {% else %}
@@ -50,9 +77,19 @@
                 <a href="{{ url_for('delete_question', question_id=question['id']) }}">
                     <button type="button" id="delete_button">Delete question</button>
                 </a></td>
-            <td><a href="{{ url_for('route_post', question_id=question['id']) }}">
+            <td><a href="{{ url_for('route_post_answer', question_id=question['id']) }}">
                 <button type="button" id="post_answer_button">Post an answer</button>
             </a></td>
+            <td>
+                <a href="{{ url_for('route_comment', question_id=question['id']) }}">
+                    <button type="button" id="comment">Comment</button>
+                </a>
+            </td>
+            <td>
+                <a href="{{ url_for('route_update_question', question_id=question['id']) }}">
+                    <button type="button" id="update">Update</button>
+                </a>
+            </td>
             <td><a href="/list">
                 <button type="button" id="go_back">Go back</button>
             </a></td>
