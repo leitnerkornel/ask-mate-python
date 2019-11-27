@@ -156,6 +156,12 @@ def get_comments_by_q_id(cursor, question_id):
 @connection.connection_handler
 def register_user(cursor, username, password, reg_date):
     cursor.execute("""
+                        CREATE TABLE IF NOT EXISTS public.users ( 
+                        id serial constraint users_pk primary key,
+                        username text,
+                        password text,
+                        reg_date timestamp without time zone,
+                        reputation int);
                         INSERT INTO users(username, password, reg_date)
                         VALUES (%(username)s, %(password)s, %(reg_date)s)
                     """,
