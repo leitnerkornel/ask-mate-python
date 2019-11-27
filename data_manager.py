@@ -108,14 +108,24 @@ def delete_answer(cursor, question_id):
                    {'question_id': question_id})
 
 @connection.connection_handler
-def search_in_table(cursor, search_phrase):
+def search_in_questions(cursor, search_phrase):
     cursor.execute("""
-                       SELECT id FROM question
-                       WHERE message LIKE %(search_phrase)s;
+                       SELECT * FROM question
+                       WHERE lower(message) LIKE lower(%(search_phrase)s) OR lower(title) LIKE lower(%(search_phrase)s);
                        """,
-                   {'search_phrase': search_phrase})
-    question_id = cursor.fetchone()
-    return question_id
+                   {'search_phrase': "%" + search_phrase + "%"})
+    questions = cursor.fetchall()
+    return questions
+
+@connection.connection_handler
+def search_in_answers(cursor, search_phrase):
+    cursor.execute("""
+                       SELECT a.message, q.id, q.title FROM answer AS a JOIN question AS q ON a.question_id = q.id
+                       WHERE lower(a.message) LIKE lower(%(search_phrase)s);
+                       """,
+                   {'search_phrase': "%" + search_phrase + "%"})
+    answers = cursor.fetchall()
+    return answers
 
 
 

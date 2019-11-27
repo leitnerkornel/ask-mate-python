@@ -61,10 +61,14 @@ def route_post(question_id):
 @app.route('/search')
 def list_search_result():
     search_phrase = request.args.get('q')
-    question_id = data_manager.search_in_table(search_phrase)
-    print(search_phrase)
-    print(question_id)
-    return render_template('search_result.html', search_phrase=search_phrase, question_id=question_id)
+    if search_phrase:
+        questions = data_manager.search_in_questions(search_phrase)
+        answers = data_manager.search_in_answers(search_phrase)
+    else:
+        questions = ""
+        answers = ""
+        search_phrase = "Sorry, it was an empty search"
+    return render_template('search_result.html', search_phrase=search_phrase, questions=questions, answers=answers)
     
 
 if __name__ == '__main__':

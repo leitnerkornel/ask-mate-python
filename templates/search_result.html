@@ -2,8 +2,64 @@
 
 {% block content %}
 
-    {{ search_phrase }}
+    <h2>You searched for: {{ search_phrase }}</h2><br/>
 
-    {{ question_id }}
+    {% if questions %}
+
+        <h2>Question</h2>
+
+        <table class="main_table">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Message</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for question in questions %}
+                <tr>
+                    <td><a
+                            href="{{ url_for("route_question", question_id=question.id) }}">{{ question.title }}</a>
+                    </td>
+                    <td> {{ question.message | safe }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h2>No match found in questions.</h2>
+    {% endif %}
+
+
+    {% if answers %}
+
+        <h2>Answers</h2>
+
+        <table class="main_table">
+            <thead>
+            <tr>
+                <th>Question</th>
+                <th>Answer</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for answer in answers %}
+                <tr>
+                    <td><a
+                            href="{{ url_for("route_question", question_id=answer.id) }}">{{ answer.title }}</a>
+                    </td>
+                    <td> {{ answer.message | safe }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h2>No match found in answers.</h2>
+    {% endif %}
+
+    <a href="{{ url_for('last_numbered_question') }}">
+        <button type="button" id="red_button">Go back to main</button>
+    </a>
 
 {% endblock %}
+
