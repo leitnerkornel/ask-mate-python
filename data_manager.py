@@ -59,6 +59,18 @@ def add_question(cursor, question_title, question_message, submission_time):
 
 
 @connection.connection_handler
+def update_question(cursor, question_id, question_title, question_message, submission_time):
+    cursor.execute("""
+                    UPDATE question
+                    SET title = %(question_title)s, message = %(question_message)s,
+                    submission_time = %(submission_time)s
+                    WHERE id = %(question_id)s;
+    """,
+                   {'question_title': question_title, 'question_message': question_message, 'question_id': question_id,
+                    'submission_time': submission_time})
+
+
+@connection.connection_handler
 def save_answers_to_question(cursor, answer_text, question_id, submission_time):
     cursor.execute("""
                         INSERT INTO answer(message, question_id, submission_time)
