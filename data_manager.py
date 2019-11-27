@@ -83,6 +83,18 @@ def update_question(cursor, question_id, question_title, question_message, submi
 
 
 @connection.connection_handler
+def update_question(cursor, question_id, question_title, question_message, submission_time):
+    cursor.execute("""
+                    UPDATE question
+                    SET title = %(question_title)s, message = %(question_message)s,
+                    submission_time = %(submission_time)s
+                    WHERE id = %(question_id)s;
+    """,
+                   {'question_title': question_title, 'question_message': question_message, 'question_id': question_id,
+                    'submission_time': submission_time})
+
+
+@connection.connection_handler
 def update_answer(cursor, answer_id, submission_time, answer_message):
     cursor.execute("""
                 UPDATE answer
@@ -175,6 +187,26 @@ def get_comments_by_q_id(cursor, question_id):
 
 
 @connection.connection_handler
+def add_comment_to_answer(cursor, message, answer_id, submission_time):
+    cursor.execute("""
+                    INSERT INTO comment(message, answer_id, submission_time)
+                    VALUES (%(message)s, %(answer_id), %(submission_time)s)
+    """,
+                   {'message': message, 'answer_id': answer_id, 'submission_time': submission_time})
+
+
+@connection.connection_handler
+def get_comments_by_a_id(cursor, answer_id):
+    cursor.execute("""
+                    SELECT message FROM comment
+                    WHERE answer_id = %(answer_id)s;
+    """,
+                   {'answer_id': answer_id})
+    comments = cursor.fetchall()
+    return comments
+
+
+@connection.connection_handler
 def register_user(cursor, username, password, reg_date):
     cursor.execute("""
                         INSERT INTO users(username, password, reg_date)
@@ -188,6 +220,12 @@ def hash_password(plain_text_password):
     return hashed_bytes.decode('utf-8')
 
 
+def hash_password(plain_text_password):
+    hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
+    return hashed_bytes.decode('utf-8')
+
+
 def verify_password(plain_text_password, hashed_password):
     hashed_bytes_password = hashed_password.encode('utf-8')
     return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)
+

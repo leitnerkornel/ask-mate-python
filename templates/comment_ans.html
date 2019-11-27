@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <h3>The answer is:</h3>
+
+    <table class="main_table">
+        <thead>
+        <tr>
+            <th>Message</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td> {{ answer.message }} </td>
+        </tr>
+        </tbody>
+    </table></br>
+
+    <h3>Comment</h3></br>
+    <div class="comment">
+        <form action="/answer/{{ answer.id }}/new-comment" method="post">
+            <textarea id="comment-input" name="message" rows="8" cols="80" required
+                      placeholder="Write your comment here"></textarea><br/>
+            <button type="submit" id="comment_button">Save comment</button>
+            <a href="/list">
+                <button type="button" id="go_back_to_all">Go back to all questions</button>
+            </a>
+        </form>
+    </div>
+
+
+
+{% endblock %}

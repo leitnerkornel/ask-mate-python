@@ -112,6 +112,19 @@ def route_comment_to_question(question_id):
     return render_template('comment.html', question=question)
 
 
+@app.route('/answer/<answer_id>/new-comment', methods=['GET', 'POST'])
+def route_comment_to_answer(answer_id):
+    answer = data_manager.get_answer_by_id(answer_id)
+    if request.method == 'POST':
+        print('fasz')
+        saved_comment = request.form['message']
+        submission_time = data_manager.get_time()
+        data_manager.add_comment_to_answer(saved_comment, answer_id, submission_time)
+        print(answer_id)
+        return redirect('/list')
+    return render_template('comment_ans.html', answer=answer, answer_id=answer_id)
+
+
 @app.route('/registration', methods=['GET', 'POST'])
 def user_registration():
     if request.method == 'POST':

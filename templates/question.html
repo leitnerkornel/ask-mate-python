@@ -68,6 +68,11 @@
                             <button type="button" id="update">Update</button>
                         </a>
                     </td>
+                    <td>
+                        <a href="{{ url_for('route_comment_to_answer', answer_id=answer['id']) }}">
+                            <button type="button" id="comment">Comment</button>
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
         {% else %}
