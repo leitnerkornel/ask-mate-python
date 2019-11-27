@@ -157,10 +157,6 @@ def search_in_answers(cursor, search_phrase):
     return answers
 
 
-
-
-
-
 def convert_linebreaks_to_br(original_str):
     return '<br/>'.join(original_str.split('\n'))
 
@@ -187,12 +183,13 @@ def get_comments_by_q_id(cursor, question_id):
 
 
 @connection.connection_handler
-def add_comment_to_answer(cursor, message, answer_id, submission_time):
+def add_comment_to_answer(cursor, com, answer_id):
     cursor.execute("""
-                    INSERT INTO comment(message, answer_id, submission_time)
-                    VALUES (%(message)s, %(answer_id), %(submission_time)s)
+                    INSERT INTO comment
+                    (message, answer_id)
+                    VALUES (%(com)s, %(answer_id)s)
     """,
-                   {'message': message, 'answer_id': answer_id, 'submission_time': submission_time})
+                   {'com': com, 'answer_id': answer_id})
 
 
 @connection.connection_handler

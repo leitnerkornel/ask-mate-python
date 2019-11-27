@@ -117,9 +117,8 @@ def route_comment_to_answer(answer_id):
     answer = data_manager.get_answer_by_id(answer_id)
     if request.method == 'POST':
         print('fasz')
-        saved_comment = request.form['message']
-        submission_time = data_manager.get_time()
-        data_manager.add_comment_to_answer(saved_comment, answer_id, submission_time)
+        saved_comment = request.form['com']
+        data_manager.add_comment_to_answer(saved_comment, answer_id)
         print(answer_id)
         return redirect('/list')
     return render_template('comment_ans.html', answer=answer, answer_id=answer_id)

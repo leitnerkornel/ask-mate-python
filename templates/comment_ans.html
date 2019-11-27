@@ -20,10 +20,10 @@
     <h3>Comment</h3></br>
     <div class="comment">
         <form action="/answer/{{ answer.id }}/new-comment" method="post">
-            <textarea id="comment-input" name="message" rows="8" cols="80" required
+            <textarea id="comment-input" name="com" rows="8" cols="80" required
                       placeholder="Write your comment here"></textarea><br/>
             <button type="submit" id="comment_button">Save comment</button>
-            <a href="/list">
+            <a href="/">
                 <button type="button" id="go_back_to_all">Go back to all questions</button>
             </a>
         </form>
