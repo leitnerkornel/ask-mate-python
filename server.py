@@ -105,6 +105,19 @@ def list_search_result(search_phrase):
     return render_template('search_result.html', result=result)
 
 
+@app.route('/search')
+def list_search_result():
+    search_phrase = request.args.get('q')
+    if search_phrase:
+        questions = data_manager.search_in_questions(search_phrase)
+        answers = data_manager.search_in_answers(search_phrase)
+    else:
+        questions = ""
+        answers = ""
+        search_phrase = "Sorry, it was an empty search"
+    return render_template('search_result.html', search_phrase=search_phrase, questions=questions, answers=answers)
+
+
 if __name__ == '__main__':
     app.run(
         host='0.0.0.0',
