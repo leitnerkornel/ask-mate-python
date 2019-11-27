@@ -9,7 +9,7 @@
         <tr>
             <th>Title</th>
             <th>Message</th>
-            <th>Asked by</th>
+            <th>Posted by</th>
 
         </tr>
         </thead>
@@ -52,6 +52,8 @@
             {% if answers %}
                 <th>Posted</th>
                 <th>Message</th>
+                <th>Posted by</th>
+                <th>Action</th>
             {% endif %}
         </tr>
         </thead>
@@ -61,6 +63,7 @@
                 <tr>
                     <td>{{ answer.submission_time | safe }}</td>
                     <td>{{ answer.message | safe }}</td>
+                    <td>{{ answer.username }}</td>
                     <td>
                         <a href="{{ url_for('delete_answer_alone', answer_id=answer['id'], question_id=question['id']) }}">
                             <button type="button" id="red_button">Delete answer</button>
@@ -85,12 +88,12 @@
             </a></td>
             <td>
                 <a href="{{ url_for('route_comment', question_id=question['id']) }}">
-                    <button type="button" id="comment">Comment</button>
+                    <button type="button" id="green_button">Comment</button>
                 </a>
             </td>
             <td>
                 <a href="{{ url_for('route_update_question', question_id=question['id']) }}">
-                    <button type="button" id="update">Update</button>
+                    <button type="button" id="green_button">Update</button>
                 </a>
             </td>
             <td><a href="/list">
