@@ -22,18 +22,18 @@
     <table>
         <thead>
         <tr>
-            {% if comments %}
+            {% if comment %}
                 <th>Posted</th>
                 <th>Comment</th>
             {% endif %}
         </tr>
         </thead>
         <tbody>
-        {% if comments %}
-            {% for comment in comments %}
+        {% if comment %}
+            {% for com in comment %}
                 <tr>
-                    <td>{{ comment.submission_time | safe }}</td>
-                    <td>{{ comment.comment | safe }}</td>
+                    <td>{{ com.submission_time | safe }}</td>
+                    <td>{{ com.message | safe }}</td>
                 </tr>
             {% endfor %}
         {% else %}
@@ -61,6 +61,11 @@
                     <td>
                         <a href="{{ url_for('delete_answer_alone', answer_id=answer['id'], question_id=question['id']) }}">
                             <button type="button" id="delete_button">Delete answer</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('route_update_answer', question_id=question['id'], answer_id=answer['id']) }}">
+                            <button type="button" id="update">Update</button>
                         </a>
                     </td>
                 </tr>
