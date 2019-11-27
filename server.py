@@ -33,12 +33,23 @@ def route_add_question():
     return render_template('message.html')
 
 
+@app.route('/question/<question_id>/update', methods=['POST', 'GET'])
+def route_update_question(question_id):
+    question = data_manager.get_question_by_id(question_id)
+    if request.method == "POST":
+        question_title = request.form['title']
+        question_message = request.form['message']
+        submission_time = data_manager.get_time()
+        data_manager.update_question(question_id, question_title, question_message, submission_time)
+        return redirect(f'/question/{question_id}')
+    return render_template('update.html', question=question)
+
+
 @app.route('/question/<question_id>', methods=['GET'])
 def route_question(question_id):
     question = data_manager.get_question_by_id(question_id)
     answers = data_manager.get_answers_by_question_id(question_id)
     comments = data_manager.get_comments_by_q_id(question_id)
-    print(comments)
     return render_template('question.html', question=question, answers=answers, comments=comments)
 
 
