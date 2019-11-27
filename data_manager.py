@@ -108,7 +108,7 @@ def get_time():
 def delete_answer(cursor, answer_id, question_id):
     cursor.execute("""
                         DELETE FROM answer
-                        WHERE answer_id = %(answer_id)s AND
+                        WHERE id = %(answer_id)s AND
                         question_id = %(question_id)s;
                     """,
                    {'answer_id': answer_id, 'question_id': question_id})

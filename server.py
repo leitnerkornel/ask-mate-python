@@ -71,7 +71,7 @@ def delete_question(question_id):
     return redirect('/')
 
 
-@app.route('/question/<question_id>/delete-answer')
+@app.route('/question/<question_id>/<answer_id>/delete-answer')
 def delete_answer_alone(answer_id, question_id):
     data_manager.delete_answer(answer_id, question_id)
     return redirect(f"/question/{question_id}")
