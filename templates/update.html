@@ -10,9 +10,9 @@
             <textarea id="question_title" name="title" rows="1" cols="40"> {{ question.title }}</textarea><br/>
             <label for="question_message">Message:</label> <br/>
             <textarea id="question_message" name="message" rows="8" cols="80">{{ question.message }}</textarea><br/>
-            <button type="submit" id="update">Save message</button>
+            <button type="submit" id="green_button">Save message</button>
             <a href="{{ url_for('all_question') }}">
-                <button type="button" id="go_back_main">Go back</button>
+                <button type="button" id="red_button">Go back</button>
             </a>
         </form>
     </div>
