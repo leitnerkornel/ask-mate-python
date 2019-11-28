@@ -4,7 +4,7 @@ import data_manager
 app = Flask(__name__)
 
 # This will come from session.
-logged_user_id = 1
+logged_user_id = 5
 
 
 @app.route('/')
