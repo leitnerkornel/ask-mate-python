@@ -59,7 +59,7 @@ def get_numbered_question(cursor, numb_limit):
 
 
 @connection.connection_handler
-def add_question(cursor, question_title, question_message, submission_time, name, user_id):
+def add_question(cursor, question_title, question_message, name, user_id):
     cursor.execute("""  
                         ALTER TABLE question ADD COLUMN IF NOT EXISTS username text;
                         ALTER TABLE question ADD COLUMN IF NOT EXISTS user_id integer;
@@ -103,7 +103,7 @@ def update_answer(cursor, answer_id, answer_message):
 
 
 @connection.connection_handler
-def save_answers_to_question(cursor, answer_text, question_id, submission_time, name, user_id):
+def save_answers_to_question(cursor, answer_text, question_id, name, user_id):
     cursor.execute("""
                         ALTER TABLE answer ADD COLUMN IF NOT EXISTS username text;
                         ALTER TABLE answer ADD COLUMN IF NOT EXISTS user_id integer;
