@@ -27,8 +27,7 @@ def route_add_question():
     if request.method == "POST":
         question_title = request.form['title']
         question_message = request.form['note']
-        submission_time = data_manager.get_time()
-        data_manager.add_question(question_title, question_message, submission_time)
+        data_manager.add_question(question_title, question_message)
         return redirect('/')
     return render_template('message.html')
 
@@ -39,8 +38,7 @@ def route_update_question(question_id):
     if request.method == "POST":
         question_title = request.form['title']
         question_message = request.form['message']
-        submission_time = data_manager.get_time()
-        data_manager.update_question(question_id, question_title, question_message, submission_time)
+        data_manager.update_question(question_id, question_title, question_message)
         return redirect(f'/question/{question_id}')
     return render_template('update.html', question=question)
 
@@ -50,8 +48,7 @@ def route_update_answer(answer_id):
     answer = data_manager.get_answer_by_id(answer_id)
     if request.method == "POST":
         answer_message = request.form['message']
-        submission_time = data_manager.get_time()
-        data_manager.update_answer(answer_id, submission_time, answer_message)
+        data_manager.update_answer(answer_id, answer_message)
         return redirect('/list')
     return render_template('update-answer.html', answer=answer, answer_id=answer_id)
 
@@ -82,8 +79,7 @@ def route_post_answer(question_id):
     question = data_manager.get_question_by_id(question_id)
     if request.method == 'POST':
         saved_answer = request.form['answer']
-        submission_time = data_manager.get_time()
-        data_manager.save_answers_to_question(saved_answer, question_id, submission_time)
+        data_manager.save_answers_to_question(saved_answer, question_id)
         return redirect(f"/question/{question_id}")
     return render_template('answer.html', question=question)
 
@@ -106,8 +102,7 @@ def route_comment_to_question(question_id):
     question = data_manager.get_question_by_id(question_id)
     if request.method == 'POST':
         saved_comment = request.form['com']
-        submission_time = data_manager.get_time()
-        data_manager.add_comment_to_question(saved_comment, question_id, submission_time)
+        data_manager.add_comment_to_question(saved_comment, question_id)
         return redirect(f"/question/{question_id}")
     return render_template('comment.html', question=question)
 
@@ -128,8 +123,7 @@ def user_registration():
     if request.method == 'POST':
         username = request.form['username']
         password = data_manager.hash_password(request.form['pwd1'])
-        reg_date = data_manager.get_time()
-        data_manager.register_user(username, password, reg_date)
+        data_manager.register_user(username, password)
 
     return render_template('registration.html')
 

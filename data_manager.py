@@ -60,57 +60,54 @@ def get_numbered_question(cursor, numb_limit):
 
 
 @connection.connection_handler
-def add_question(cursor, question_title, question_message, submission_time):
+def add_question(cursor, question_title, question_message):
     cursor.execute("""
                         INSERT INTO question 
                         (title, message, submission_time)
-                        VALUES (%(question_title)s, %(question_message)s, %(submission_time)s) ;
+                        VALUES (%(question_title)s, %(question_message)s, current_timestamp(0));
                        """,
-                   {'question_title': question_title, 'question_message': question_message,
-                    'submission_time': submission_time})
+                   {'question_title': question_title, 'question_message': question_message})
 
 
 @connection.connection_handler
-def update_question(cursor, question_id, question_title, question_message, submission_time):
+def update_question(cursor, question_id, question_title, question_message):
     cursor.execute("""
                     UPDATE question
                     SET title = %(question_title)s, message = %(question_message)s,
-                    submission_time = %(submission_time)s
+                    submission_time = current_timestamp(0)
                     WHERE id = %(question_id)s;
     """,
-                   {'question_title': question_title, 'question_message': question_message, 'question_id': question_id,
-                    'submission_time': submission_time})
+                   {'question_title': question_title, 'question_message': question_message, 'question_id': question_id})
 
 
 @connection.connection_handler
-def update_question(cursor, question_id, question_title, question_message, submission_time):
+def update_question(cursor, question_id, question_title, question_message):
     cursor.execute("""
                     UPDATE question
                     SET title = %(question_title)s, message = %(question_message)s,
-                    submission_time = %(submission_time)s
+                    submission_time = current_timestamp(0)
                     WHERE id = %(question_id)s;
     """,
-                   {'question_title': question_title, 'question_message': question_message, 'question_id': question_id,
-                    'submission_time': submission_time})
+                   {'question_title': question_title, 'question_message': question_message, 'question_id': question_id})
 
 
 @connection.connection_handler
-def update_answer(cursor, answer_id, submission_time, answer_message):
+def update_answer(cursor, answer_id, answer_message):
     cursor.execute("""
                 UPDATE answer
-                SET  submission_time = %(submission_time)s, message = %(answer_message)s
+                SET  submission_time = current_timestamp(0), message = %(answer_message)s
                 WHERE id = %(answer_id)s
     """,
-                   {'answer_message': answer_message, 'submission_time': submission_time, 'answer_id': answer_id})
+                   {'answer_message': answer_message, 'answer_id': answer_id})
 
 
 @connection.connection_handler
-def save_answers_to_question(cursor, answer_text, question_id, submission_time):
+def save_answers_to_question(cursor, answer_text, question_id):
     cursor.execute("""
                         INSERT INTO answer(message, question_id, submission_time)
-                        VALUES (%(answer_text)s, %(question_id)s, %(submission_time)s)
+                        VALUES (%(answer_text)s, %(question_id)s, current_timestamp(0))
                     """,
-                   {'answer_text': answer_text, 'question_id': question_id, 'submission_time': submission_time})
+                   {'answer_text': answer_text, 'question_id': question_id})
 
 
 @connection.connection_handler
@@ -164,13 +161,13 @@ def convert_linebreaks_to_br(original_str):
 
 
 @connection.connection_handler
-def add_comment_to_question(cursor, com, question_id, submission_time):
+def add_comment_to_question(cursor, com, question_id):
     cursor.execute("""
                     INSERT INTO comment
                     (message, question_id, submission_time)
-                    VALUES (%(com)s, %(question_id)s, %(submission_time)s)
+                    VALUES (%(com)s, %(question_id)s, current_timestamp(0))
     """,
-                   {'com': com, 'question_id': question_id, 'submission_time': submission_time})
+                   {'com': com, 'question_id': question_id})
 
 
 @connection.connection_handler
@@ -188,8 +185,8 @@ def get_comments_by_q_id(cursor, question_id):
 def add_comment_to_answer(cursor, com, answer_id):
     cursor.execute("""
                     INSERT INTO comment
-                    (message, answer_id)
-                    VALUES (%(com)s, %(answer_id)s)
+                    (message, answer_id, submission_time)
+                    VALUES (%(com)s, %(answer_id)s, current_timestamp(0))
     """,
                    {'com': com, 'answer_id': answer_id})
 
@@ -197,8 +194,8 @@ def add_comment_to_answer(cursor, com, answer_id):
 @connection.connection_handler
 def get_comments_by_a_id(cursor, answer_id):
     cursor.execute("""
-                    SELECT message FROM comment
-                    WHERE answer_id = %(answer_id)s;
+                    SELECT submission_time, message FROM comment
+                    WHERE answer_id = %(answer_id)s ;
     """,
                    {'answer_id': answer_id})
     comments = cursor.fetchall()
@@ -206,12 +203,12 @@ def get_comments_by_a_id(cursor, answer_id):
 
 
 @connection.connection_handler
-def register_user(cursor, username, password, reg_date):
+def register_user(cursor, username, password):
     cursor.execute("""
                         INSERT INTO users(username, password, reg_date)
-                        VALUES (%(username)s, %(password)s, %(reg_date)s)
+                        VALUES (%(username)s, %(password)s, current_timestamp(0))
                     """,
-                   {'username': username, 'password': password, 'reg_date': reg_date})
+                   {'username': username, 'password': password})
 
 
 def hash_password(plain_text_password):
