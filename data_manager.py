@@ -49,14 +49,15 @@ def get_numbered_question(cursor, numb_limit):
 
 
 @connection.connection_handler
-def add_question(cursor, question_title, question_message, submission_time, name):
+def add_question(cursor, question_title, question_message, submission_time, name, user_id):
     cursor.execute("""  
                         ALTER TABLE question ADD COLUMN IF NOT EXISTS username text;
-                        INSERT INTO question (title, message, submission_time, username)
-                        VALUES (%(question_title)s, %(question_message)s, %(submission_time)s, %(name)s);
+                        ALTER TABLE question ADD COLUMN IF NOT EXISTS user_id integer;
+                        INSERT INTO question (title, message, submission_time, username, user_id)
+                        VALUES (%(question_title)s, %(question_message)s, %(submission_time)s, %(name)s, %(user_id)s);
                        """,
                    {'question_title': question_title, 'question_message': question_message,
-                    'submission_time': submission_time, 'name': name})
+                    'submission_time': submission_time, 'name': name, 'user_id': user_id})
 
 
 @connection.connection_handler
@@ -72,14 +73,15 @@ def update_question(cursor, question_id, question_title, question_message, submi
 
 
 @connection.connection_handler
-def save_answers_to_question(cursor, answer_text, question_id, submission_time, name):
+def save_answers_to_question(cursor, answer_text, question_id, submission_time, name, user_id):
     cursor.execute("""
                         ALTER TABLE answer ADD COLUMN IF NOT EXISTS username text;
-                        INSERT INTO answer(message, question_id, submission_time, username)
-                        VALUES (%(answer_text)s, %(question_id)s, %(submission_time)s, %(name)s);
+                        ALTER TABLE answer ADD COLUMN IF NOT EXISTS user_id integer;
+                        INSERT INTO answer(message, question_id, submission_time, username, user_id)
+                        VALUES (%(answer_text)s, %(question_id)s, %(submission_time)s, %(name)s, %(user_id)s);
                     """,
                    {'answer_text': answer_text, 'question_id': question_id, 'submission_time': submission_time,
-                    'name': name})
+                    'name': name, 'user_id': user_id})
 
 
 @connection.connection_handler
@@ -104,6 +106,7 @@ def delete_answer(cursor, answer_id, question_id):
                         question_id = %(question_id)s;
                     """,
                    {'answer_id': answer_id, 'question_id': question_id})
+
 
 @connection.connection_handler
 def search_in_questions(cursor, search_phrase):
@@ -174,4 +177,26 @@ def hash_password(plain_text_password):
 def verify_password(plain_text_password, hashed_password):
     hashed_bytes_password = hashed_password.encode('utf-8')
     return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)
+
+
+@connection.connection_handler
+def get_username_by_id(cursor, user_id):
+    cursor.execute("""
+                    SELECT username FROM users
+                    WHERE id = %(user_id)s;
+                   """,
+                   {'user_id': user_id})
+    question = cursor.fetchone()
+    return question
+
+
+@connection.connection_handler
+def get_user_id_by_username(cursor, username):
+    cursor.execute("""
+                    SELECT username FROM users
+                    WHERE username = %(username)s;
+                   """,
+                   {'username': username})
+    question = cursor.fetchone()
+    return question
 
