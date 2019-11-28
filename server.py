@@ -61,6 +61,7 @@ def route_question(question_id):
     question = data_manager.get_question_by_id(question_id)
     answers = data_manager.get_answers_by_question_id(question_id)
     comment = data_manager.get_comments_by_q_id(question_id)
+    comment_ans = data_manager.get_comments_by_a_id(answer_id)
     return render_template('question.html', question=question, answers=answers, comment=comment)
 
 
@@ -116,10 +117,8 @@ def route_comment_to_question(question_id):
 def route_comment_to_answer(answer_id):
     answer = data_manager.get_answer_by_id(answer_id)
     if request.method == 'POST':
-        print('fasz')
         saved_comment = request.form['com']
         data_manager.add_comment_to_answer(saved_comment, answer_id)
-        print(answer_id)
         return redirect('/list')
     return render_template('comment_ans.html', answer=answer, answer_id=answer_id)
 
