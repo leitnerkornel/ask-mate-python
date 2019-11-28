@@ -1,5 +1,4 @@
 import connection
-from psycopg2 import sql
 from datetime import datetime
 import bcrypt
 
@@ -60,13 +59,15 @@ def get_numbered_question(cursor, numb_limit):
 
 
 @connection.connection_handler
-def add_question(cursor, question_title, question_message):
-    cursor.execute("""
-                        INSERT INTO question 
-                        (title, message, submission_time)
-                        VALUES (%(question_title)s, %(question_message)s, current_timestamp(0));
-                       """,
-                   {'question_title': question_title, 'question_message': question_message})
+def add_question(cursor, question_title, question_message, submission_time, name, user_id):
+    cursor.execute("""  
+                        ALTER TABLE question ADD COLUMN IF NOT EXISTS username text;
+                        ALTER TABLE question ADD COLUMN IF NOT EXISTS user_id integer;
+                        INSERT INTO question (title, message, submission_time, username, user_id)
+                        VALUES (%(question_title)s, %(question_message)s, current_timestamp(0), %(name)s, %(user_id)s);
+                        """,
+                   {'question_title': question_title, 'question_message': question_message,
+                    'name': name, 'user_id': user_id})
 
 
 @connection.connection_handler
@@ -102,12 +103,15 @@ def update_answer(cursor, answer_id, answer_message):
 
 
 @connection.connection_handler
-def save_answers_to_question(cursor, answer_text, question_id):
+def save_answers_to_question(cursor, answer_text, question_id, submission_time, name, user_id):
     cursor.execute("""
-                        INSERT INTO answer(message, question_id, submission_time)
-                        VALUES (%(answer_text)s, %(question_id)s, current_timestamp(0))
+                        ALTER TABLE answer ADD COLUMN IF NOT EXISTS username text;
+                        ALTER TABLE answer ADD COLUMN IF NOT EXISTS user_id integer;
+                        INSERT INTO answer(message, question_id, submission_time, username, user_id)
+                        VALUES (%(answer_text)s, %(question_id)s, current_timestamp(0), %(name)s, %(user_id)s);
                     """,
-                   {'answer_text': answer_text, 'question_id': question_id})
+                   {'answer_text': answer_text, 'question_id': question_id,
+                    'name': name, 'user_id': user_id})
 
 
 @connection.connection_handler
@@ -205,6 +209,12 @@ def get_comments_by_a_id(cursor, answer_id):
 @connection.connection_handler
 def register_user(cursor, username, password):
     cursor.execute("""
+                        CREATE TABLE IF NOT EXISTS public.users ( 
+                        id serial constraint users_pk primary key,
+                        username text,
+                        password text,
+                        reg_date timestamp without time zone,
+                        reputation int);
                         INSERT INTO users(username, password, reg_date)
                         VALUES (%(username)s, %(password)s, current_timestamp(0))
                     """,
@@ -224,3 +234,26 @@ def hash_password(plain_text_password):
 def verify_password(plain_text_password, hashed_password):
     hashed_bytes_password = hashed_password.encode('utf-8')
     return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)
+
+
+@connection.connection_handler
+def get_username_by_id(cursor, user_id):
+    cursor.execute("""
+                    SELECT username FROM users
+                    WHERE id = %(user_id)s;
+                   """,
+                   {'user_id': user_id})
+    question = cursor.fetchone()
+    return question
+
+
+@connection.connection_handler
+def get_user_id_by_username(cursor, username):
+    cursor.execute("""
+                    SELECT username FROM users
+                    WHERE username = %(username)s;
+                   """,
+                   {'username': username})
+    question = cursor.fetchone()
+    return question
+

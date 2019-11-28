@@ -38,6 +38,7 @@
                 <th>Title</th>
                 <th>Message</th>
                 <th>Submission Time</th>
+                <th>Posted by</th>
                 <th>Image</th>
             </tr>
             </thead>
@@ -49,6 +50,7 @@
                     </td>
                     <td> {{ question.message | safe }}</td>
                     <td> {{ question.submission_time }} </td>
+                    <td> {{ question.username }} </td>
                     {% if question.image %}
                         <td><img src="./static/{{ question.image }}" width="80" height="80"></td>
                     {% else %}

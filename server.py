@@ -3,6 +3,9 @@ import data_manager
 
 app = Flask(__name__)
 
+# This will come from session.
+logged_user_id = 1
+
 
 @app.route('/')
 def last_numbered_question():
@@ -28,6 +31,9 @@ def route_add_question():
         question_title = request.form['title']
         question_message = request.form['note']
         data_manager.add_question(question_title, question_message)
+        username = data_manager.get_username_by_id(logged_user_id) # This will come from session.
+        data_manager.add_question(question_title, question_message,
+                     username['username'], logged_user_id)
         return redirect('/')
     return render_template('message.html')
 
@@ -79,7 +85,9 @@ def route_post_answer(question_id):
     question = data_manager.get_question_by_id(question_id)
     if request.method == 'POST':
         saved_answer = request.form['answer']
-        data_manager.save_answers_to_question(saved_answer, question_id)
+        username = data_manager.get_username_by_id(logged_user_id) # This will come from session.
+        data_manager.save_answers_to_question(saved_answer, question_id,
+                                              username['username'], logged_user_id)
         return redirect(f"/question/{question_id}")
     return render_template('answer.html', question=question)
 
