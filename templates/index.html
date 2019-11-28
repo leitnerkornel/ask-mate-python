@@ -3,12 +3,15 @@
 {% block content %}
     <table class="buttons">
         <tr>
-            <td><a href="{{ url_for('route_add_question') }}">
-                <button type="button" id="green_button">Ask a question</button>
-            </a></td>
-            <td><a href="{{ url_for('all_question') }}">
-                <button type="button" id="red_button">See all question</button>
-            </a></td>
+            <div style="text-align: center;">
+                <td><a href="{{ url_for('route_add_question') }}">
+                    <button type="button" id="green_button">Ask a question</button>
+                </a></td>
+                <td><a href="{{ url_for('all_question') }}">
+                    <button type="button" id="red_button">See all question</button>
+                </a></td>
+            </div>
+
         </tr>
     </table><br>
     <br>

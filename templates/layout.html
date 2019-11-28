@@ -11,14 +11,22 @@
 <h3>Questions and Answers</h3>
 <h4>"1N73LL1G3NC3 15 7H3 4B1L17Y 70 4D4P7 70 CH4NG3"</h4>
 <h5>573PH3N H4WK1NG</h5>
-<a href="{{ url_for('user_registration') }}">
-    <button type="button" id="green_button">Registration</button>
-</a>
+<div style="text-align: center;">
+    <a href="{{ url_for('user_registration') }}">
+        <button type="button" id="green_button">Registration</button>
+    </a>
+</div>
+<br/>
 
-<form action="/search" style="margin:auto;max-width:300px">
-    <input type="text" placeholder="Search.." name="q">
-    <button type="submit" id="green_button"><i>Search</i></button>
-</form>
+<div style="text-align: center;">
+    <form action="/search" style="margin:auto;max-width:300px">
+        <input type="text" placeholder="Search.." name="q">
+        <button type="submit" id="green_button"><i>Search</i></button>
+    </form>
+</div>
+<br/>
+<br/>
+
 
 {% block content %} {% endblock %}
 

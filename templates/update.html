@@ -4,7 +4,7 @@
 
     <h3>Edit question</h3>
 
-    <div class="edit-question">
+    <div class="main_table" style="text-align: center">
         <form action="/question/{{ question.id }}/update-question" method="post">
             <label for="question_title">Title:</label><br/>
             <textarea id="question_title" name="title" rows="1" cols="40"> {{ question.title }}</textarea><br/>

@@ -37,6 +37,7 @@ tbody tr td:first-child {
 }
 
 .answer_table {
+    align-content: center;
     width: 80%;
     margin: 0px auto;
 }
@@ -157,8 +158,6 @@ h5 {
 .add_question {
     text-align: center;
 }
-
-
 
 
 .answer {

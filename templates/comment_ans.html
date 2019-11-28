@@ -26,23 +26,26 @@
             {% endif %}
         </tr>
         </thead>
-        <tbody>
-        {% if comment %}
-            {% for com in comment %}
-                <tr>
-                    <td>{{ com.submission_time | safe }}</td>
-                    <td>{{ com.message | safe }}</td>
-                </tr>
-            {% endfor %}
-        {% else %}
-            <h3>No comments yet.</h3>
-        {% endif %}
-        </tbody>
+        <div class="answer_table" style="text-align: center;">
+            <tbody>
+            {% if comment %}
+                {% for com in comment %}
+                    <tr>
+                        <td>{{ com.submission_time | safe }}</td>
+                        <td>{{ com.message | safe }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <h3>No comments yet.</h3>
+            {% endif %}
+            </tbody>
+        </div>
     </table>
 
     <h3>Comment</h3></br>
-    <div class="comment">
-        <form action="/answer/{{ answer_id }}/new-comment" method="post">
+    <table class="main_table">
+        <div style="text-align: center;">
+            <form action="/answer/{{ answer_id }}/new-comment" method="post">
             <textarea id="comment-input" name="com" rows="8" cols="80" required
                       placeholder="Write your comment here"></textarea><br/>
             <button type="submit" id="green_button">Save comment</button>
@@ -50,7 +53,8 @@
                 <button type="button" id="red_button">Go back to all questions</button>
             </a>
         </form>
-    </div>
+        </div>
+    </table>
 
 
 

@@ -3,7 +3,7 @@
 {% block content %}
 
     <h3>Ask a question</h3>
-    <div class="add_question">
+    <table class="main_table" style="text-align: center">
         <form action="/add-question" method="post">
             <label for="title-input">Title:</label><br/>
             <textarea id="title-input" name="title" rows="1" cols="40" required
@@ -11,10 +11,11 @@
             <label for="note-input">Message:</label> <br/>
             <textarea id="note-input" name="note" rows="8" cols="80" required
                       placeholder="Write your question here"></textarea><br/>
+
             <button type="submit" id="green_button">Save message</button>
             <a href="{{ url_for('all_question') }}">
                 <button type="button" id="red_button">See all question</button>
             </a>
         </form>
-    </div>
+    </table>
 {% endblock %}

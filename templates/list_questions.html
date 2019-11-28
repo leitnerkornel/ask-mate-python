@@ -11,18 +11,21 @@
                 <button type="button" id="red_button">Go back to main</button>
             </a></td>
         </tr>
-    </table><br>
+    </table><br/>
     <br/>
-    <br>
-    <table class="order">
+    <br/>
+    <br/>
+    <table>
         <td>
-            <select onchange="this.form.submit()" name="order" form="order_by">
+            <div style="text-align: center;">
+                <select onchange="this.form.submit()" name="order" form="order_by">
                 <option value="title">Sort by...</option>
                 <option value="title">Title</option>
                 <option value="message">Message</option>
                 <option value="submission_time">Submission time</option>
             </select>
             <form action="/list" id="order_by" method="GET"></form>
+            </div>
         </td>
     </table>
 

@@ -19,7 +19,7 @@
         </tbody>
     </table>
     <h2>Comments</h2>
-    <table>
+    <table class="main_table">
         <thead>
         <tr>
             {% if comment %}
@@ -56,23 +56,26 @@
         {% if answers %}
             {% for answer in answers %}
                 <tr>
-                    <td>{{ answer.submission_time | safe }}</td>
-                    <td>{{ answer.message | safe }}</td>
-                    <td>
-                        <a href="{{ url_for('delete_answer_alone', answer_id=answer['id'], question_id=question['id']) }}">
-                            <button type="button" id="red_button">Delete answer</button>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{{ url_for('route_update_answer', answer_id=answer['id']) }}">
-                            <button type="button" id="green_button">Update</button>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{{ url_for('route_comment_to_answer', answer_id=answer['id']) }}">
-                            <button type="button" id="green_button">Comment</button>
-                        </a>
-                    </td>
+                    <div style="text-align: center;">
+                        <td>{{ answer.submission_time | safe }}</td>
+                        <td>{{ answer.message | safe }}</td>
+                        <td>
+                            <a href="{{ url_for('delete_answer_alone', answer_id=answer['id'], question_id=question['id']) }}">
+                                <button type="button" id="red_button">Delete answer</button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ url_for('route_update_answer', answer_id=answer['id']) }}">
+                                <button type="button" id="green_button">Update</button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ url_for('route_comment_to_answer', answer_id=answer['id']) }}">
+                                <button type="button" id="green_button">Comment</button>
+                            </a>
+                        </td>
+                    </div>
+
                 </tr>
             {% endfor %}
         {% else %}
@@ -81,28 +84,31 @@
         </tbody>
     </table><br/>
 
-    <table class="buttons_question">
+    <table>
         <tr>
-            <td>
-                <a href="{{ url_for('delete_question', question_id=question['id']) }}">
-                    <button type="button" id="red_button">Delete question</button>
+            <div style="text-align: center;">
+                <td>
+                    <a href="{{ url_for('delete_question', question_id=question['id']) }}">
+                        <button type="button" id="red_button">Delete question</button>
+                    </a></td>
+                <td><a href="{{ url_for('route_post_answer', question_id=question['id']) }}">
+                    <button type="button" id="green_button">Post an answer</button>
                 </a></td>
-            <td><a href="{{ url_for('route_post_answer', question_id=question['id']) }}">
-                <button type="button" id="green_button">Post an answer</button>
-            </a></td>
-            <td>
-                <a href="{{ url_for('route_comment_to_question', question_id=question['id']) }}">
-                    <button type="button" id="green_button">Comment</button>
-                </a>
-            </td>
-            <td>
-                <a href="{{ url_for('route_update_question', question_id=question['id']) }}">
-                    <button type="button" id="green_button">Update</button>
-                </a>
-            </td>
-            <td><a href="/list">
-                <button type="button" id="red_button">Go back</button>
-            </a></td>
+                <td>
+                    <a href="{{ url_for('route_comment_to_question', question_id=question['id']) }}">
+                        <button type="button" id="green_button">Comment</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ url_for('route_update_question', question_id=question['id']) }}">
+                        <button type="button" id="green_button">Update</button>
+                    </a>
+                </td>
+                <td><a href="/list">
+                    <button type="button" id="red_button">Go back</button>
+                </a></td>
+            </div>
+
         </tr>
     </table>
 
