@@ -32,7 +32,6 @@
         {% if comment %}
             {% for com in comment %}
                 <tr>
-                    <td>{{ com.submission_time | safe }}</td>
                     <td>{{ com.message | safe }}</td>
                 </tr>
             {% endfor %}

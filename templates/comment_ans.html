@@ -16,6 +16,29 @@
         </tr>
         </tbody>
     </table></br>
+    <h2>Comments</h2>
+    <table>
+        <thead>
+        <tr>
+            {% if comment %}
+                <th>Posted</th>
+                <th>Comment</th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% if comment %}
+            {% for com in comment %}
+                <tr>
+                    <td>{{ com.submission_time | safe }}</td>
+                    <td>{{ com.message | safe }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <h3>No comments yet.</h3>
+        {% endif %}
+        </tbody>
+    </table>
 
     <h3>Comment</h3></br>
     <div class="comment">

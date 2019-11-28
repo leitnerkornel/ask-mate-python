@@ -136,6 +136,7 @@ def delete_answer(cursor, answer_id, question_id):
                     """,
                    {'answer_id': answer_id, 'question_id': question_id})
 
+
 @connection.connection_handler
 def search_in_questions(cursor, search_phrase):
     cursor.execute("""
@@ -145,6 +146,7 @@ def search_in_questions(cursor, search_phrase):
                    {'search_phrase': "%" + search_phrase + "%"})
     questions = cursor.fetchall()
     return questions
+
 
 @connection.connection_handler
 def search_in_answers(cursor, search_phrase):
@@ -225,4 +227,3 @@ def hash_password(plain_text_password):
 def verify_password(plain_text_password, hashed_password):
     hashed_bytes_password = hashed_password.encode('utf-8')
     return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)
-
