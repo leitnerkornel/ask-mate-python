@@ -15,37 +15,35 @@ def last_numbered_question():
 
 @app.route('/list')
 def all_question():
-    allowed_order_options = ["title", "submission_time", "message"]
     order_by = request.args.get('order')
-    if order_by in allowed_order_options:
-        questions = data_manager.get_questions(order_by)
-    else:
-        questions = data_manager.get_questions(2)
+    questions = data_manager.get_questions(order_by)
 
     return render_template("list_questions.html", questions=questions)
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
 def route_add_question():
-    if request.method == "POST":
-        question_title = request.form['title']
-        question_message = request.form['note']
-        #data_manager.add_question(question_title, question_message)
-        username = data_manager.get_username_by_id(logged_user_id)  # This will come from session.
-        data_manager.add_question(question_title, question_message,
-                     username['username'], logged_user_id)
-        return redirect('/')
-    return render_template('message.html')
+    if request.method == "GET":
+        return render_template('message.html')
+
+    question_title = request.form['title']
+    question_message = request.form['note']
+    #data_manager.add_question(question_title, question_message)
+    username = data_manager.get_username_by_id(logged_user_id)  # This will come from session.
+    data_manager.add_question(question_title, question_message,
+                 username['username'], logged_user_id)
+    return redirect('/')
 
 
 @app.route('/question/<question_id>/update-question', methods=['POST', 'GET'])
 def route_update_question(question_id):
-    question = data_manager.get_question_by_id(question_id)
     if request.method == "POST":
         question_title = request.form['title']
         question_message = request.form['message']
         data_manager.update_question(question_id, question_title, question_message)
         return redirect(f'/question/{question_id}')
+
+    question = data_manager.get_question_by_id(question_id)
     return render_template('update.html', question=question)
 
 
@@ -82,14 +80,16 @@ def delete_answer_alone(answer_id, question_id):
 
 @app.route('/question/<question_id>/new-answer', methods=['GET', 'POST'])
 def route_post_answer(question_id):
-    question = data_manager.get_question_by_id(question_id)
-    if request.method == 'POST':
-        saved_answer = request.form['answer']
-        username = data_manager.get_username_by_id(logged_user_id)  # This will come from session.
-        data_manager.save_answers_to_question(saved_answer, question_id,
-                                              username['username'], logged_user_id)
-        return redirect(f"/question/{question_id}")
-    return render_template('answer.html', question=question)
+    if request.method == 'GET':
+        question = data_manager.get_question_by_id(question_id)
+        return render_template('answer.html', question=question)
+
+    saved_answer = request.form['answer']
+    username = data_manager.get_username_by_id(logged_user_id)  # This will come from session.
+    data_manager.save_answers_to_question(saved_answer, question_id,
+                                          username['username'], logged_user_id)
+    return redirect(f"/question/{question_id}")
+
 
 
 @app.route('/search')
@@ -123,7 +123,7 @@ def route_comment_to_answer(answer_id):
         saved_comment = request.form['com']
         data_manager.add_comment_to_answer(saved_comment, answer_id)
         return redirect('/list')
-    return render_template('comment_ans.html', answer=answer, answer_id=answer_id, comment=comment)
+    return render_template('comment_ans.html', answer=answer, comment=comment)
 
 
 @app.route('/registration', methods=['GET', 'POST'])

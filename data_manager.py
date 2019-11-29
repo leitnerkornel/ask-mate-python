@@ -1,3 +1,5 @@
+from psycopg2 import sql
+
 import connection
 from datetime import datetime
 import bcrypt
@@ -17,7 +19,7 @@ def get_answers_by_question_id(cursor, question_id):
 @connection.connection_handler
 def get_answer_by_id(cursor, answer_id):
     cursor.execute("""
-                    SELECT message FROM answer
+                    SELECT id, message FROM answer
                     WHERE id = %(answer_id)s;
                     """,
                    {'answer_id': answer_id})
@@ -37,11 +39,20 @@ def get_question_by_id(cursor, question_id):
 
 
 @connection.connection_handler
-def get_questions(cursor, order_by):
-    cursor.execute(f"""
+def get_questions(cursor, order_by, dir='ASC'):
+    allowed_order_options = ["title", "submission_time", "message"]
+    if order_by not in allowed_order_options:
+        order_by = allowed_order_options[1]
+
+    order_dir = 'ASC' if dir == 'ASC' else 'DESC'
+
+    sql_query = sql.SQL("""
                         SELECT * FROM question
-                        ORDER BY {order_by};
-                        """)
+                        ORDER BY {order_column} {dir};
+                        """).format(order_column=sql.Identifier(order_by),
+                                    dir=sql.SQL(order_dir))
+
+    cursor.execute(sql_query)
     questions = cursor.fetchall()
     return questions
 
@@ -263,4 +274,3 @@ def get_user_id_by_username(cursor, username):
                    {'username': username})
     question = cursor.fetchone()
     return question
-
