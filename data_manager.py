@@ -221,9 +221,16 @@ def register_user(cursor, username, password):
                    {'username': username, 'password': password})
 
 
-def hash_password(plain_text_password):
-    hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
-    return hashed_bytes.decode('utf-8')
+@connection.connection_handler
+def get_data_linked_to_username(cursor, username):
+    cursor.execute("""
+                    SELECT password FROM users
+                    WHERE username = %(username)s
+                    """,
+                   {'username': username})
+    required_user_data = cursor.fetchone()['password']
+    print(required_user_data)
+    return required_user_data
 
 
 def hash_password(plain_text_password):

@@ -136,6 +136,21 @@ def user_registration():
     return render_template('registration.html')
 
 
+@app.route('/login', methods=['GET', 'POST'])
+def user_login():
+    if request.method == 'POST':
+        username = request.form['username']
+        stored_password = data_manager.get_data_linked_to_username(username)
+        password_input = request.form['pwd']
+        valid_password = data_manager.verify_password(password_input, stored_password)
+        if valid_password:
+            logged_user_id = data_manager.get_data_linked_to_username(username)
+            return redirect('/')
+        else:
+            print('Itt te nem jutsz át!')
+    return render_template('login.html')
+
+
 if __name__ == '__main__':
     app.run(
         host='0.0.0.0',

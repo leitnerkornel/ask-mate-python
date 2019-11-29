@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <h3>Login</h3>
+
+    <form action="/login" method="post">
+            <label for="loginusername">Username:</label><br/>
+            <input type="text" id="loginusername" name="username" required><br/>
+            <label for="loginpassword">Password:</label> <br/>
+            <input type="password" id="loginpassword" name="pwd" required><br/>
+            <button type="submit" id="login">Logging in</button>
+            <a href="{{ url_for('all_question') }}">
+                <button type="button" id="go_back_main">Go back to main</button>
+            </a>
+        </form>
+
+{% endblock %}
