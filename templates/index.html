@@ -5,10 +5,10 @@
         <tr>
             <div style="text-align: center;">
                 <td><a href="{{ url_for('route_add_question') }}">
-                    <button type="button" id="green_button">Ask a question</button>
+                    <button type="button" class="btn btn-success">Ask a question</button>
                 </a></td>
                 <td><a href="{{ url_for('all_question') }}">
-                    <button type="button" id="red_button">See all question</button>
+                    <button type="button" class="btn btn-warning">See all question</button>
                 </a></td>
             </div>
 
@@ -19,15 +19,15 @@
     <br>
     <h2>The last 5 questions: newest first</h2>
 
-    <table class="main_table">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Message</th>
-            <th>Posted</th>
-            <th>Posted by</th>
-            <th>Image</th>
-        </tr>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Title</th>
+                <th>Message</th>
+                <th>Posted</th>
+                <th>Posted by</th>
+                <th>Image</th>
+            </tr>
         </thead>
         <tbody>
         {% for question in questions %}
