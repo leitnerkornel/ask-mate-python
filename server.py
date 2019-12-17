@@ -1,10 +1,26 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, session, url_for
 import data_manager
 
 app = Flask(__name__)
 
 # This will come from session.
 logged_user_id = 5
+
+logged_user = "kornel"
+def login_by_hand(user):
+    session['username'] = user
+    return "You are successfully logged."
+
+
+def current_user():
+    return session.get('username', "Anonymous")
+
+
+@app.route('/login_test/<user>')
+def login_test(user):
+    session['username'] = user
+    print(session['username'])
+    return "You are successfully logged."
 
 
 @app.route('/')
