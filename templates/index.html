@@ -1,5 +1,11 @@
 {% extends "layout.html" %}
 
+{% block head %}
+
+    <title>@skm@t3 - Home page</title>
+
+{% endblock %}
+
 {% block content %}
     <table class="buttons">
         <tr>
@@ -21,13 +27,13 @@
 
     <table class="table">
         <thead class="thead-dark">
-            <tr>
-                <th>Title</th>
-                <th>Message</th>
-                <th>Posted</th>
-                <th>Posted by</th>
-                <th>Image</th>
-            </tr>
+        <tr>
+            <th>Title</th>
+            <th>Message</th>
+            <th>Posted</th>
+            <th>Posted by</th>
+            <th>Image</th>
+        </tr>
         </thead>
         <tbody>
         {% for question in questions %}
