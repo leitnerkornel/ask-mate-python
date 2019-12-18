@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 import data_manager
+import util
 
 app = Flask(__name__)
 
@@ -7,6 +8,8 @@ app = Flask(__name__)
 logged_user_id = 5
 
 logged_user = "kornel"
+
+
 def login_by_hand(user):
     session['username'] = user
     return "You are successfully logged."
@@ -44,10 +47,10 @@ def route_add_question():
 
     question_title = request.form['title']
     question_message = request.form['note']
-    #data_manager.add_question(question_title, question_message)
+    # data_manager.add_question(question_title, question_message)
     username = data_manager.get_username_by_id(logged_user_id)  # This will come from session.
     data_manager.add_question(question_title, question_message,
-                 username['username'], logged_user_id)
+                              username['username'], logged_user_id)
     return redirect('/')
 
 
@@ -75,10 +78,13 @@ def route_update_answer(answer_id):
 
 @app.route('/question/<question_id>', methods=['GET'])
 def route_question(question_id):
+    MAX_WORD_IN_TITLE = 4
     question = data_manager.get_question_by_id(question_id)
     answers = data_manager.get_answers_by_question_id(question_id)
     comment = data_manager.get_comments_by_q_id(question_id)
-    return render_template('question.html', question=question, answers=answers, comment=comment)
+    question_title = util.page_title_from_question_title(question, MAX_WORD_IN_TITLE)
+    return render_template('question.html', question=question, answers=answers, comment=comment,
+                           question_title=question_title)
 
 
 @app.route('/question/<question_id>/delete')
@@ -105,7 +111,6 @@ def route_post_answer(question_id):
     data_manager.save_answers_to_question(saved_answer, question_id,
                                           username['username'], logged_user_id)
     return redirect(f"/question/{question_id}")
-
 
 
 @app.route('/search')
