@@ -27,7 +27,7 @@ def login_test(user):
 
 
 @app.route('/')
-def last_numbered_question():
+def index_last_numbered_question():
     numbered_question = data_manager.get_numbered_question(numb_limit=5)
     return render_template("index.html", questions=numbered_question)
 
@@ -78,11 +78,10 @@ def route_update_answer(answer_id):
 
 @app.route('/question/<question_id>', methods=['GET'])
 def route_question(question_id):
-    MAX_WORD_IN_TITLE = 4
     question = data_manager.get_question_by_id(question_id)
     answers = data_manager.get_answers_by_question_id(question_id)
     comment = data_manager.get_comments_by_q_id(question_id)
-    question_title = util.page_title_from_question_title(question, MAX_WORD_IN_TITLE)
+    question_title = util.page_title_from_question_title(question, max_word=4)
     return render_template('question.html', question=question, answers=answers, comment=comment,
                            question_title=question_title)
 
