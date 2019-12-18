@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
     <link rel="icon" href="{{ url_for('static', filename='images/question_mark.ico') }}"/>
 
     {% block head %} {% endblock %}
-
 
 </head>
 <body>
@@ -19,65 +18,44 @@
 <h5>573PH3N H4WK1NG</h5>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-            data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
-            aria-label="Toggle navigation">
+    <a class="navbar-brand" href="{{ url_for('index_last_numbered_question') }}">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#!">Navbar</a>
+    <a class="navbar-brand" href="{{ url_for('all_question') }}">Questions</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="{{ url_for('index_last_numbered_question') }}">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#!">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#!">Link</a>
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
             </li>
         </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
     </div>
 </nav>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm">
-            <div style="text-align: center;">
-                <a href="{{ url_for('user_registration') }}">
-                    <button type="button" class="btn btn-primary">Registration</button>
-                </a>
-            </div>
-        </div>
-        <div class="col-sm">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Launch demo modal
-            </button>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">Modal title</div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm">
-            One of three columns
-        </div>
-    </div>
-</div>
-
-
-<br/>
+<a href="{{ url_for('user_registration') }}">
+    <button type="button" class="btn btn-primary">Registration</button>
+</a>
 
 <div style="text-align: center;">
     <form action="/search" style="margin:auto;max-width:300px">
