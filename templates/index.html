@@ -7,23 +7,31 @@
 {% endblock %}
 
 {% block content %}
-    <table class="buttons">
-        <tr>
-            <div style="text-align: center;">
-                <td><a href="{{ url_for('route_add_question') }}">
-                    <button type="button" class="btn btn-success">Ask a question</button>
-                </a></td>
-                <td><a href="{{ url_for('all_question') }}">
-                    <button type="button" class="btn btn-warning">See all question</button>
-                </a></td>
-            </div>
 
-        </tr>
-    </table><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <!-- Content -->
+            </div>
+            <div class="col-lg-2">
+                <a href="{{ url_for('route_add_question') }}">
+                    <button type="button" class="btn btn-success">Ask a question</button>
+                </a>
+            </div>
+            <div class="col-lg-2">
+                <a href="{{ url_for('all_question') }}">
+                    <button type="button" class="btn btn-warning">See all question</button>
+                </a>
+            </div>
+            <div class="col-lg-4">
+                <!-- Content -->
+            </div>
+        </div>
+    </div>
     <br>
     <br>
     <br>
-    <h2>The last 5 questions: newest first</h2>
+    <h2>The last {{ question_limit }} questions: newest first</h2>
 
     <table class="table">
         <thead class="thead-dark">
@@ -39,17 +47,17 @@
         {% for question in questions %}
             <tr>
                 <td><a href="{{ url_for("route_question", question_id=question['id']) }}">{{ question.title }}</a></td>
-                <td> {{ question.message | safe }}</td>
+                <td> {{ question.message[:200] | safe }}</td>
                 <td> {{ question.submission_time }} </td>
                 <td> {{ question.username }} </td>
                 {% if question.image %}
-                    <td><img src="./static/{{ question.image }}" width="80" height="80"></td>
+                    <td><img src="./static/{{ question.image }}" width="80" height="80" alt="Image for question"></td>
                 {% else %}
                     <td></td>
                 {% endif %}
             </tr>
         {% endfor %}
         </tbody>
-    </table></br>
+    </table><br/>
 
 {% endblock %}
