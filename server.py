@@ -28,8 +28,9 @@ def login_test(user):
 
 @app.route('/')
 def index_last_numbered_question():
-    numbered_question = data_manager.get_numbered_question(numb_limit=5)
-    return render_template("index.html", questions=numbered_question)
+    question_limit = 5
+    numbered_question = data_manager.get_numbered_question(question_limit)
+    return render_template("index.html", questions=numbered_question, question_limit=question_limit)
 
 
 @app.route('/list')
@@ -37,7 +38,7 @@ def all_question():
     order_by = request.args.get('order')
     questions = data_manager.get_questions(order_by)
 
-    return render_template("list_questions.html", questions=questions)
+    return render_template("all_question.html", questions=questions)
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
@@ -47,7 +48,6 @@ def route_add_question():
 
     question_title = request.form['title']
     question_message = request.form['note']
-    # data_manager.add_question(question_title, question_message)
     username = data_manager.get_username_by_id(logged_user_id)  # This will come from session.
     data_manager.add_question(question_title, question_message,
                               username['username'], logged_user_id)
