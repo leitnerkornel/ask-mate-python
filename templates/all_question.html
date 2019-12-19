@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% block head %}
+
+    <title>@skm@t3 - All questions</title>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <h3>All questions: newest first</h3>
+            </div>
+            <div class="col-lg-2">
+                <a href="{{ url_for('route_add_question') }}">
+                    <button type="button" class="btn btn-success">Ask a question</button>
+                </a>
+            </div>
+            <div class="col-lg-2">
+                <a href="{{ url_for('index_last_numbered_question') }}">
+                    <button type="button" class="btn btn-danger">Go back to main</button>
+                </a>
+            </div>
+            <div class="col-lg-2">
+                <label>
+                    <select onchange="this.form.submit()" name="order" form="order_by">
+                        <option value="title">Sort by...</option>
+                        <option value="title">Title</option>
+                        <option value="message">Message</option>
+                        <option value="submission_time">Submission time</option>
+                    </select>
+                </label>
+                <form action="/list" id="order_by" method="GET"></form>
+                <label>
+                    <select onchange="this.form.submit()" name="order" form="order_by">
+                        <option value="title">Sort by...</option>
+                        <option value="title">Title</option>
+                        <option value="message">Message</option>
+                        <option value="submission_time">Submission time</option>
+                    </select>
+                </label>
+                <form action="/list" id="order_by" method="GET"></form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>Title</th>
+            <th>Message</th>
+            <th>Submission Time</th>
+            <th>Posted by</th>
+            <th>Image</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for question in questions %}
+            <tr>
+                <td><a href="{{ url_for("route_question", question_id=question['id']) }}">{{ question.title }}</a>
+                </td>
+                <td> {{ question.message[:200] | safe }} </td>
+                <td> {{ question.submission_time }} </td>
+                <td> {{ question.username }} </td>
+                {% if question.image %}
+                    <td><img src="./static/{{ question.image }}" width="80" height="80" alt="Image for question">
+                    </td>
+                {% else %}
+                    <td></td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </div>{% endblock %}
