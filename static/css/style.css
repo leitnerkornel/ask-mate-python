@@ -7,3 +7,30 @@ body {
     background-size: cover;
     background-attachment: fixed;
 }
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    color: #FFFFFF;
+}
+
+tr:hover {
+    background-color: rgba(255, 150, 69, 0.92);
+}
+
+a {
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #FFFFFF;
+}
+
+a:visited {
+    color: #FFFFFF;
+}
+
