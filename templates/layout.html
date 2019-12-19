@@ -12,11 +12,13 @@
 
 </head>
 <body>
-<h1>@skm@t3</h1><br/>
-<h3>Questions and Answers</h3>
-<h4>"1N73LL1G3NC3 15 7H3 4B1L17Y 70 4D4P7 70 CH4NG3"</h4>
-<h5>573PH3N H4WK1NG</h5>
-
+<img src="{{ url_for('static', filename='images/askmate_logo.png') }}" alt="Title logo - @skm@t3">
+<br/>
+<img src="{{ url_for('static', filename='images/questions_and_answers.png') }}" alt="Subtitle - Questions and answers">
+<br/>
+<img src="{{ url_for('static', filename='images/quote.png') }}" alt="Quote - 1N73LL1G3NC3 15 7H3 4B1L17Y 70 4D4P7 70 CH4NG3">
+<img src="{{ url_for('static', filename='images/stephen_hawking.png') }}" alt="Author - Stephen Hawking">
+<br/>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="{{ url_for('index_last_numbered_question') }}">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -28,7 +30,7 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="{{ url_for('index_last_numbered_question') }}">Home</a>
+    <a class="navbar-brand" href="{{ url_for('user_registration') }}">Registration</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -46,24 +48,12 @@
                 <a class="nav-link disabled" href="#">Disabled</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <form action="/search" class="form-inline my-2 my-lg-0" autocomplete="off">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search..." name="q" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
 </nav>
-
-<a href="{{ url_for('user_registration') }}">
-    <button type="button" class="btn btn-primary">Registration</button>
-</a>
-
-<div style="text-align: center;">
-    <form action="/search" style="margin:auto;max-width:300px">
-        <input type="text" placeholder="Search.." name="q">
-        <button type="submit" class="btn btn-success"><i>Search</i></button>
-    </form>
-</div>
-<br/>
 <br/>
 
 {% block content %} {% endblock %}
