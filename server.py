@@ -1,8 +1,11 @@
-from flask import Flask, render_template, request, redirect, session, url_for
+from flask import Flask, render_template, request, redirect, session
+
 import data_manager
 import util
 
 app = Flask(__name__)
+
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 # This will come from session.
 logged_user_id = 5
@@ -150,9 +153,15 @@ def route_comment_to_answer(answer_id):
 def user_registration():
     if request.method == 'POST':
         username = request.form['username']
-        password = data_manager.hash_password(request.form['pwd1'])
-        data_manager.register_user(username, password)
-
+        password = util.hash_password(request.form['pwd1'])
+        registered_users = data_manager.get_usernames_by_username(username)
+        if util.is_username_free(username, registered_users):
+            success = f"The registration was successful. You can log in with {username}."
+            data_manager.register_user(username, password)
+            return render_template('login.html', message=success)
+        else:
+            error = f"The username: {username} is already taken. Try again."
+            return render_template('registration.html', message=error)
     return render_template('registration.html')
 
 
@@ -162,7 +171,7 @@ def user_login():
         username = request.form['username']
         stored_password = data_manager.get_data_linked_to_username(username)
         password_input = request.form['pwd']
-        valid_password = data_manager.verify_password(password_input, stored_password)
+        valid_password = util.verify_password(password_input, stored_password)
         if valid_password:
             logged_user_id = data_manager.get_data_linked_to_username(username)
             return redirect('/')

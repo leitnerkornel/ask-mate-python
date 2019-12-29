@@ -8,6 +8,8 @@
 
 {% block content %}
 
+    <h2>{{ message if message }}</h2>
+
     <h3>User registration</h3>
     <script type="text/javascript">
 
@@ -25,7 +27,7 @@
                 form.username.focus();
                 return false;
             }
-            re =     /^\w+$/;
+            re = /^\w+$/;
             if (!re.test(form.username.value)) {
                 alert("Username must contain only letters, numbers and underscores!");
                 form.username.focus();
@@ -33,18 +35,18 @@
             }
             if (form.pwd1.value !== form.pwd2.value) {
                 alert("The password and confirm password isn't match!");
-            form.pwd1.focus();
-            return false;
-        }
+                form.pwd1.focus();
+                return false;
+            }
 
-        if (form.pwd1.value === "") {
-            alert("Password cannot be blank!");
-            form.username.focus();
-            return false;
-        }
+            if (form.pwd1.value === "") {
+                alert("Password cannot be blank!");
+                form.username.focus();
+                return false;
+            }
 
 
-        return true;
+            return true;
         }
 
     </script>

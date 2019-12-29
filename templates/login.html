@@ -8,14 +8,17 @@
 
 {% block content %}
 
+
+    <h2>{{ message if message }}</h2>
+
     <h3>Login</h3>
 
     <form action="/login" method="post">
-            <label for="loginusername">Username:</label><br/>
-            <input type="text" id="loginusername" name="username" required><br/>
-            <label for="loginpassword">Password:</label> <br/>
-            <input type="password" id="loginpassword" name="pwd" required><br/>
-            <button type="submit" id="login">Logging in</button>
+            <label for="login-username">Username:</label><br/>
+            <input type="text" id="login-username" name="username" required><br/>
+            <label for="login-password">Password:</label> <br/>
+            <input type="password" id="login-password" name="pwd" required><br/>
+            <button type="submit" id="login">Log in!</button>
             <a href="{{ url_for('all_question') }}">
                 <button type="button" id="go_back_main">Go back to main</button>
             </a>

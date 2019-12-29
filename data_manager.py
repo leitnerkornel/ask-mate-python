@@ -244,16 +244,6 @@ def get_data_linked_to_username(cursor, username):
     return required_user_data
 
 
-def hash_password(plain_text_password):
-    hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
-    return hashed_bytes.decode('utf-8')
-
-
-def verify_password(plain_text_password, hashed_password):
-    hashed_bytes_password = hashed_password.encode('utf-8')
-    return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)
-
-
 @connection.connection_handler
 def get_username_by_id(cursor, user_id):
     cursor.execute("""
@@ -266,7 +256,7 @@ def get_username_by_id(cursor, user_id):
 
 
 @connection.connection_handler
-def get_user_id_by_username(cursor, username):
+def get_usernames_by_username(cursor, username):
     cursor.execute("""
                     SELECT username FROM users
                     WHERE username = %(username)s;
